@@ -26,7 +26,7 @@ export function Login() {
 
           <CardContent className="px-9 pb-9">
             <div className="space-y-8">
-              <div className="space-y-3">
+              <div className="space-y-[2px]">
                 <Label
                   htmlFor="email"
                   className="text-[16px] font-medium text-[#0A0A0A]"
@@ -54,7 +54,7 @@ export function Login() {
                 />
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-[2px]">
                 <div className="flex items-center justify-between">
                   <Label
                     htmlFor="password"
