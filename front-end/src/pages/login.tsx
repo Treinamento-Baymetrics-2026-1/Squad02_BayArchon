@@ -13,7 +13,7 @@ export function Login() {
       </header>
 
       <main className="flex-1 flex items-center justify-center p-4">
-<Card className="w-full max-w-[563px] rounded-2xl bg-[#f8fafc] border-2 border-[#D1D5DB] ring-0 outline-none shadow-xl">
+        <Card className="w-full max-w-[563px] rounded-2xl bg-[#f8fafc] border-2 border-[#D1D5DB] ring-0 outline-none shadow-xl">
           <CardHeader className="px-9 pt-9 pb-4">
             <CardTitle className="text-[18px] font-semibold text-preto-suave">
               Login
@@ -26,7 +26,6 @@ export function Login() {
 
           <CardContent className="px-9 pb-9">
             <div className="space-y-8">
-          
               <div className="space-y-3">
                 <Label
                   htmlFor="email"
