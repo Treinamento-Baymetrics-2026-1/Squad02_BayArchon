@@ -1,8 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Login } from "@/pages/login";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Dashboard</div>,
+    element: <Login />,
   },
+  /* 
+  {
+    path: "/cadastro",
+    element: <Cadastro />,
+  },
+  */
 ]);
