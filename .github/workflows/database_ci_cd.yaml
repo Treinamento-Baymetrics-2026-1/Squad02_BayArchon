@@ -8,7 +8,7 @@ on:
   push:
     branches: [ dev, main ]
     paths: 
-      - "supabase/migrations/**"
+      - "database/supabase/migrations/**"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
