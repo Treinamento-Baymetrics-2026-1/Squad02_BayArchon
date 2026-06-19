@@ -1,0 +1,8 @@
+node_modules
+node_modules/*
+
+config.toml
+
+setup/env/.env.dev
+setup/env/.env.prod
+setup/env/.env.qa
