@@ -9,6 +9,7 @@ on:
     branches: [ dev, main ]
     paths: 
       - "supabase/migrations/**"
+    workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
