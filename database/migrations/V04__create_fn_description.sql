@@ -4,7 +4,7 @@ LANGUAGE plpgsql
 AS $$
 BEGIN
     RETURN(
-        AND length(trim(p_description)) >= 3
+        length(trim(p_description)) >= 3
         AND p_description !~ '  '
     );
 END;
