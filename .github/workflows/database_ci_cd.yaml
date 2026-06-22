@@ -4,12 +4,12 @@ on:
   pull_request:
     branches: [ dev, main ]
     paths:
-      - "supabase/migrations/**"
+      - "database/supabase/migrations/**"
   push:
     branches: [ dev, main ]
     paths: 
-      - "supabase/migrations/**"
-    workflow_dispatch:
+      - "database/supabase/migrations/**"
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
