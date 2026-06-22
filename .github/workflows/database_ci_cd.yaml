@@ -4,11 +4,12 @@ on:
   pull_request:
     branches: [ dev, main ]
     paths:
-      - "database/supabase/migrations/**"
+      - "database/migrations/**"
   push:
     branches: [ dev, main ]
     paths: 
-      - "database/supabase/migrations/**"
+      - "database/migrations/**"
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,10 +21,10 @@ permissions:
 jobs:
   sql-linting:
     name: Running SQLFluff (syntax check)
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-22.04    
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.1
         with:
           ref: ${{ github.ref }} 
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -49,12 +50,12 @@ jobs:
 
   migration-test:
     name: Dry-Run Migrations
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: [ sql-linting ] 
     
     services:
       postgres:
-        image: postgres:15
+        image: postgres:17
         env:
           POSTGRES_USER: admin
           POSTGRES_PASSWORD: admin_password
@@ -69,7 +70,7 @@ jobs:
 
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.1
 
       - name: Instalar Cliente PostgreSQL
         run: |
@@ -100,7 +101,7 @@ jobs:
   
   deploy-migrations-supabase:
     name: Deploy to Supabase via Flyway
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: [migration-test] 
 
     # Só roda se a ação vier da main e for um push
@@ -108,7 +109,7 @@ jobs:
     
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.1
 
       - name: Instalar Flyway CLI
         run: |
