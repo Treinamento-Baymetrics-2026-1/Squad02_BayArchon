@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS registry.sectors(
     name            VARCHAR(200)    NOT NULL,
     description     VARCHAR(3000)   NOT NULL,
     created_at      TIMESTAMPTZ     NOT NULL      DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMPTZ     NOT NULL      DEFAULT CURRENT_TIMESTAMP,
     deleted_at      TIMESTAMPTZ                   DEFAULT NULL,
     is_deleted      BOOLEAN         NOT NULL      DEFAULT FALSE,
 
