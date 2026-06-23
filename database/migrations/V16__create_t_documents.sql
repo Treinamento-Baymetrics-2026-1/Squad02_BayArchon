@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS documents.documents (
     name            VARCHAR(300)               NOT NULL,
     status          documents.status_documents NOT NULL,
     path            TEXT                       NOT NULL,
-    extension       VARCHAR(5)                 NOT NULL,
+    extension       VARCHAR(10)                 NOT NULL,
     source          CHAR(1)                    NOT NULL,
     created_at      TIMESTAMPTZ                NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ                NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -37,27 +37,27 @@ CREATE TABLE IF NOT EXISTS documents.documents (
         FOREIGN KEY(created_by)
         REFERENCES registry.profiles(id),
 
-    CONSTRAINT fk_documents_category_id
+    CONSTRAINT fk_documents_category
         FOREIGN KEY(category_id)
         REFERENCES registry.categories(id),
 
-    CONSTRAINT fk_documents_responsible_id
+    CONSTRAINT fk_documents_responsible
         FOREIGN KEY(responsible_id)
         REFERENCES registry.profiles(id),
 
-    CONSTRAINT fk_documents_sector_id
+    CONSTRAINT fk_documents_sector
         FOREIGN KEY(sector_id)
         REFERENCES registry.sectors(id),
 
-    CONSTRAINT fk_documents_client_id
+    CONSTRAINT fk_documents_client
         FOREIGN KEY(client_id)
         REFERENCES registry.companies_clients(id),
 
-    CONSTRAINT fk_documents_project_id
+    CONSTRAINT fk_documents_project
         FOREIGN KEY(project_id)
         REFERENCES registry.projects(id),
 
-    CONSTRAINT fk_documents_object_id
+    CONSTRAINT fk_documents_object
         FOREIGN KEY(object_id)
         REFERENCES storage.objects(id),
 
