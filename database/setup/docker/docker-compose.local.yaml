@@ -1,14 +1,14 @@
 services:
   dev_flyway:
     image: flyway/flyway:12.1.0-alpine-mongo
-    container_name: dev_flyway
+    container_name: local_flyway
     restart: "no"
     env_file:
       - ../env/.env.local
     environment:
       FLYWAY_SCHEMAS: ops_flyway
     networks:
-      - dev_net
+      - local_net
     volumes:
       - ../../migrations:/flyway/sql
 
