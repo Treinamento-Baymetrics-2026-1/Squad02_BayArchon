@@ -1,5 +1,5 @@
 services:
-  dev_flyway:
+  local_flyway:
     image: flyway/flyway:12.1.0-alpine-mongo
     container_name: local_flyway
     restart: "no"
@@ -13,5 +13,5 @@ services:
       - ../../migrations:/flyway/sql
 
 networks:
-  dev_net:
+  local_net:
     driver: bridge
