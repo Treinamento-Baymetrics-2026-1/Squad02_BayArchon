@@ -1,16 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-//import { Login } from "@/pages/login";
-import { Register } from "@/pages/registerUse";
+import { Login } from "@/pages/login";
+import { RegisterUser } from "@/pages/registerUser";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Register />,
+    path: "/Login",
+    element: <Login />,
   },
-  /* 
+  
   {
     path: "/cadastro",
-    element: <Cadastro />,
-  },
-  */
+    element: <RegisterUser />,
+  }
 ]);
