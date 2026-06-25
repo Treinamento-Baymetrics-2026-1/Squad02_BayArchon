@@ -23,7 +23,7 @@ export function LoginForm() {
   const form = useForm<LoginFormValues>({
     
     resolver: zodResolver(loginSchema),
-    mode: "onSubmit",
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
@@ -34,10 +34,15 @@ export function LoginForm() {
   function onSubmit(data: LoginFormValues) {
     console.log("Dados prontos para a API:", data);
   }
-
+console.log("Erros ao vivo:", form.formState.errors);
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" noValidate>
+<form 
+  onSubmit={form.handleSubmit(
+    onSubmit, 
+    (erros) => console.log("Deu erro na validação! Olha aqui:", erros)
+  )} 
+  className="space-y-8" 
+  noValidate>
         <FormField
           control={form.control}
           name="email"
@@ -96,13 +101,10 @@ export function LoginForm() {
           )}
         />
 
-        <Button
-          type="submit"
-          className="mt-4 h-12 w-full rounded-xl bg-azul-corporativo text-white text-[16px] font-medium hover:bg-azul-marinho"
-        >
-          Entrar
-        </Button>
+       <button type="submit" className="mt-4 h-12 w-full rounded-xl bg-red-500 text-white">
+  Botão Teste (Entrar)
+</button>
       </form>
-    </Form>
+    
   );
 }
