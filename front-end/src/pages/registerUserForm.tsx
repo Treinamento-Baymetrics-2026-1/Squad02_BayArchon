@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import logo from "@/assets/images/logo4x.png";
-import { RegisterForm } from "@/components/register-user/RegisterUser";
+import { RegisterUserForm } from "@/components/register-user-form/RegisterUserForm";
 
 export function RegisterUser() {
   return (
@@ -8,9 +8,9 @@ export function RegisterUser() {
       <header className="w-full px-8 py-6 flex justify-start items-center">
         <img src={logo} alt="BayArchon Logo" className="h-9 object-contain" />
       </header>
-
       <main className="flex-1 flex items-center justify-center p-4">
         <Card className="w-full max-w-[563px] rounded-2xl bg-offwhite border-2 border-bordaoff-white ring-0 outline-none shadow-xl">
+          
           <CardHeader className="px-9 pt-9 pb-4">
             <CardTitle className="text-[22px] font-bold text-azul-marinho">
               Cadastro
@@ -20,9 +20,11 @@ export function RegisterUser() {
               Preencha as informações
             </p>
           </CardHeader>
+
           <CardContent className="px-9 pb-9">
-            <RegisterForm />
+            <RegisterUserForm />
           </CardContent>
+          
         </Card>
       </main>
     </div>

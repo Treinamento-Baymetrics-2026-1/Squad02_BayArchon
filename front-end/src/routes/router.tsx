@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Login } from "@/pages/login";
-import { RegisterUser } from "@/pages/registerUser";
+import { RegisterUser } from "@/pages/registerUserForm";
 
 export const router = createBrowserRouter([
   {

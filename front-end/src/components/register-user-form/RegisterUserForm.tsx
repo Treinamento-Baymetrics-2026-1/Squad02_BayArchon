@@ -28,9 +28,10 @@ const registerSchema = z.object({
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
-export function RegisterForm() {
+export function RegisterUserForm() {
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
+    mode: "onChange",
     defaultValues: {
       name: "",
       email: "",
@@ -43,11 +44,12 @@ export function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
+        
         <FormField
           control={form.control}
           name="name"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="space-y-[2px]">
               <FormLabel className="text-[16px] font-medium text-azul-marinho">
                 Nome Completo
@@ -55,8 +57,12 @@ export function RegisterForm() {
               <FormControl>
                 <Input
                   type="text"
-                  placeholder="Felipe Santos"
-                  className="h-12 rounded-xl border-2 border-cinza-medio bg-white px-4 text-[16px] shadow-sm placeholder:text-preto-suave focus-visible:ring-0 focus-visible:border-cinza-medio"
+                  placeholder="Digite seu nome completo"
+                  className={`h-12 rounded-xl border-2 bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 ${
+                    fieldState.error
+                      ? "border-vermelho focus-visible:border-vermelho"
+                      : "border-cinza-medio focus-visible:border-cinza-medio"
+                  }`}
                   {...field}
                 />
               </FormControl>
@@ -65,10 +71,11 @@ export function RegisterForm() {
           )}
         />
 
+        {/* Email */}
         <FormField
           control={form.control}
           name="email"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="space-y-[2px]">
               <FormLabel className="text-[16px] font-medium text-azul-marinho">
                 Email
@@ -76,8 +83,12 @@ export function RegisterForm() {
               <FormControl>
                 <Input
                   type="email"
-                  placeholder="felipe.santos@baymetrics.com.br"
-                  className="h-12 rounded-xl border-2 border-cinza-medio bg-white px-4 text-[16px] shadow-sm placeholder:text-preto-suave focus-visible:ring-0 focus-visible:border-cinza-medio"
+                  placeholder="Digite seu email"
+                  className={`h-12 rounded-xl border-2 bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 ${
+                    fieldState.error
+                      ? "border-vermelho focus-visible:border-vermelho"
+                      : "border-cinza-medio focus-visible:border-cinza-medio"
+                  }`}
                   {...field}
                 />
               </FormControl>
@@ -85,19 +96,25 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
-
+        
         <FormField
           control={form.control}
           name="role"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="space-y-[2px]">
               <FormLabel className="text-[16px] font-medium text-azul-marinho">
                 Nível de acesso
               </FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className="w-full h-12 rounded-xl border-2 border-cinza-medio bg-white px-4 text-[16px] shadow-sm text-preto-suave ring-0 outline-none focus:ring-0 focus:border-cinza-medio data-[state=open]:border-cinza-medio">
-                    <SelectValue placeholder="Selecione o nível" />
+                  <SelectTrigger
+                    className={`w-full h-12 rounded-xl border-2 bg-white px-4 text-[16px] shadow-sm text-preto-suave ring-0 outline-none focus:ring-0 data-[placeholder]:text-cinza-escuro ${
+                      fieldState.error
+                        ? "border-vermelho focus:border-vermelho data-[state=open]:border-vermelho"
+                        : "border-cinza-medio focus:border-cinza-medio data-[state=open]:border-cinza-medio"
+                    }`}
+                  >
+                    <SelectValue placeholder="Escolha o acesso" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent
@@ -107,7 +124,7 @@ export function RegisterForm() {
                 >
                   <SelectItem value="colaborador">Colaborador</SelectItem>
                   <SelectItem value="admin">Administrador</SelectItem>
-                  <SelectItem value="admin">Gestor</SelectItem>
+                  <SelectItem value="gestor">Gestor</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-sm text-vermelho" />
@@ -115,18 +132,25 @@ export function RegisterForm() {
           )}
         />
 
+
         <FormField
           control={form.control}
           name="department"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="space-y-[2px]">
               <FormLabel className="text-[16px] font-medium text-azul-marinho">
                 Setor
               </FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className="w-full h-12 rounded-xl border-2 border-cinza-medio bg-white px-4 text-[16px] shadow-sm text-preto-suave ring-0 outline-none focus:ring-0 focus:border-cinza-medio data-[state=open]:border-cinza-medio">
-                    <SelectValue placeholder="Selecione o setor" />
+                  <SelectTrigger
+                    className={`w-full h-12 rounded-xl border-2 bg-white px-4 text-[16px] shadow-sm text-preto-suave ring-0 outline-none focus:ring-0 data-[placeholder]:text-cinza-escuro ${
+                      fieldState.error
+                        ? "border-vermelho focus:border-vermelho data-[state=open]:border-vermelho"
+                        : "border-cinza-medio focus:border-cinza-medio data-[state=open]:border-cinza-medio"
+                    }`}
+                  >
+                    <SelectValue placeholder="Escolha o setor" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent
@@ -134,7 +158,7 @@ export function RegisterForm() {
                   sideOffset={4}
                   className="w-[var(--radix-select-trigger-width)] border-2 border-cinza-medio rounded-xl bg-white shadow-md"
                 >
-                  <SelectItem value="ti">BAC</SelectItem>
+                  <SelectItem value="ti">TI</SelectItem> 
                   <SelectItem value="rh">RH</SelectItem>
                   <SelectItem value="financeiro">Financeiro</SelectItem>
                 </SelectContent>
