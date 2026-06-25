@@ -3,7 +3,7 @@ import { Login } from "@/pages/login";
 
 export const router = createBrowserRouter([
   {
-    path: "/Login",
+    path: "/",
     element: <Login />,
   },
   /* 
