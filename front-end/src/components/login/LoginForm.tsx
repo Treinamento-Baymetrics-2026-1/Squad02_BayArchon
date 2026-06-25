@@ -21,24 +21,27 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
   const form = useForm<LoginFormValues>({
+    
     resolver: zodResolver(loginSchema),
+    mode: "onSubmit",
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
+  console.log("Erros atuais do form:", form.formState.errors);
   function onSubmit(data: LoginFormValues) {
     console.log("Dados prontos para a API:", data);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" noValidate>
         <FormField
           control={form.control}
           name="email"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="space-y-[2px]">
               <FormLabel className="text-[16px] font-medium text-preto-claro">
                 Email
@@ -47,8 +50,12 @@ export function LoginForm() {
                 <Input
                   type="email"
                   placeholder="m@example.com"
-                  className="h-12 rounded-xl border-2 border-cinza-medio bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 focus-visible:border-cinza-medio"
-                  {...field}
+                  className={`h-12 rounded-xl border-2 border-cinza-medio bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 ${   
+                  fieldState.error
+                  ? "border-vermelho focus-visible:border-vermelho"
+                  :"border-cinza-medio focus-visible:border-cinza-medio"
+                 }`}
+                    {...field}
                 />
               </FormControl>
               <FormMessage className="text-sm text-vermelho" />
@@ -59,7 +66,7 @@ export function LoginForm() {
         <FormField
           control={form.control}
           name="password"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem className="space-y-[2px]">
               <div className="flex items-center justify-between">
                 <FormLabel className="text-[16px] font-medium text-preto-claro">
@@ -76,7 +83,11 @@ export function LoginForm() {
                 <Input
                   type="password"
                   placeholder="Digite sua senha"
-                  className="h-12 rounded-xl border-2 border-cinza-medio bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 focus-visible:border-cinza-medio"
+                  className={`h-12 rounded-xl border-2 border-cinza-medio bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 ${
+                    fieldState.error
+                      ? "border-vermelho focus-visible:border-vermelho"
+                      : "border-cinza-medio focus-visible:border-cinza-medio"
+                  }`}
                   {...field}
                 />
               </FormControl>
