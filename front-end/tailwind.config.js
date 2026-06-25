@@ -11,9 +11,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'preto-claro': '#0a0a0a',
-        'bordaoff-white': '#d1d5db',
-        'off-white': '#F8FAFB',
         'azul-marinho': '#20234A',
         'azul-corporativo': '#324A8A',
         'azul-interativo': '#4F7DFF',
