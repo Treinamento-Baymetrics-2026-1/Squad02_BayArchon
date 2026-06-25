@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS documents.documents (
         FOREIGN KEY(object_id)
         REFERENCES storage.objects(id),
 
-    CONSTRAINT chk_documents_source_relationship
+    CONSTRAINT chk_documents_source
     CHECK 
     (
         (
