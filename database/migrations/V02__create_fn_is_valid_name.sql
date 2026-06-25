@@ -1,6 +1,7 @@
-CREATE OR REPLACE FUNCTION functions.name(IN p_name TEXT)
+CREATE OR REPLACE FUNCTION functions.fn_is_valid_name(IN p_name TEXT)
 RETURNS BOOLEAN
 LANGUAGE plpgsql
+IMMUTABLE
 AS $$
 BEGIN
     RETURN(
