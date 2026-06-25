@@ -8,7 +8,7 @@ export const router = createBrowserRouter([
   },
   /* 
   {
-    path: "/cadastro",
+    path: "/cadastro ",
     element: <Cadastro />,
   },
   */
