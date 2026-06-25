@@ -58,13 +58,17 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [ sql-linting ] 
     
+    # VALORES HARDCODED:
+    # Esse serviço é efemero e será destruido após seu uso.
+    # Portanto, não há perigo em manter essas credenciais
+    # simples expostas. Jamais use as do banco de verdade.
     services:
       postgres:
-        image: postgres:${{ env.PG_VERSION }}
+        image: postgres:17
         env:
-          POSTGRES_USER: ${{ env.DB_TEST_USER }}
-          POSTGRES_PASSWORD: ${{ env.DB_TEST_PASS }}
-          POSTGRES_DB: ${{ env.DB_TEST_NAME }}
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin_password_ephemeral
+          POSTGRES_DB: app_test_db
         ports:
           - 5432:5432
         options: >-
@@ -75,7 +79,7 @@ jobs:
 
     steps:
       - name: Checkout do código
-        uses: actions/checkout@v5.0.1
+        uses: actions/checkout@v4
 
       - name: Instalar Cliente PostgreSQL
         env:
@@ -92,11 +96,8 @@ jobs:
           echo "Iniciando a execução dos scripts na pasta $MIGRATIONS_DIR..."
           
           set -e 
-          
-          # Evita erro se a pasta estiver vazia
           shopt -s nullglob
           
-          # Iteração segura sobre os arquivos
           for script in "$MIGRATIONS_DIR"/*.sql; do
             echo "Aplicando: $script"
             psql -h localhost -U ${{ env.DB_TEST_USER }} -d ${{ env.DB_TEST_NAME }} -f "$script"
@@ -105,7 +106,7 @@ jobs:
           
       - name: Validação de Sucesso
         run: echo "🎉 Todos os scripts são válidos e o banco foi construído sem erros!"
-  
+    
   deploy-migrations-supabase:
     name: Deploy to Supabase via Flyway
     runs-on: ubuntu-22.04
