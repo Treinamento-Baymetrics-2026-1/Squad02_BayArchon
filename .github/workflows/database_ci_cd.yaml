@@ -51,7 +51,7 @@ jobs:
         run: pip install sqlfluff
 
       - name: Run SQLFluff Lint
-        run: sqlfluff lint ${{ github.event.inputs.migrations_path || env.DEFAULT_MIGRATIONS_PATH }} --dialect postgres
+        run: sqlfluff lint ${{ github.event.inputs.migrations_path || env.DEFAULT_MIGRATIONS_PATH }} --config .sqlfluff
 
   migration-test:
     name: Dry-Run Migrations
