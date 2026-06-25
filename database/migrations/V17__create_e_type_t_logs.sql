@@ -4,10 +4,11 @@ BEGIN
         SELECT 1
         FROM pg_type t
         JOIN pg_namespace n ON n.oid = t.typnamespace
-        WHERE t.typname = 'type_logs'
+        WHERE t.typname = 'logs.e_type_t_logs'
           AND n.nspname = 'logs'
     ) THEN
-        CREATE TYPE logs.type_logs AS ENUM (
+        CREATE TYPE logs.e_event_type_t_logs
+         AS ENUM (
             'document_status_changed',
             'document_created',
             'document_updated',

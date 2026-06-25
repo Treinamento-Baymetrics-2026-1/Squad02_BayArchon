@@ -1,6 +1,7 @@
-CREATE OR REPLACE FUNCTION functions.email(p_email TEXT)
+CREATE OR REPLACE FUNCTION functions.fn_is_valid_email(p_email TEXT)
 RETURNS BOOLEAN
-LANGUAGE sql
+LANGUAGE plpgsql
+IMMUTABLE
 AS $$
     SELECT
         p_email IS NOT NULL
