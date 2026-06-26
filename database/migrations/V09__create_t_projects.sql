@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS registry.projects(
 
     CONSTRAINT fk_projects_client
         FOREIGN KEY(client_id)
-        REFERENCES registry.client(id),
+        REFERENCES registry.companies_clients(id),
 
     CONSTRAINT fk_projects_category
         FOREIGN KEY(category_id)

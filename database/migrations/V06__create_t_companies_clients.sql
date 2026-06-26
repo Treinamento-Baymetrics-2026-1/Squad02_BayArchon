@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS registry.companies_clients(
     name            VARCHAR(200)    NOT NULL,
     status          CHAR(1)         NOT NULL,
     cnpj            VARCHAR(14)     NOT NULL,
-    email           VARCHAR(320)    NOT NULL
+    email           VARCHAR(320)    NOT NULL,
     created_at      TIMESTAMPTZ     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ     NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS registry.companies_clients(
         CHECK(functions.cnpj(cnpj)),
 
     CONSTRAINT chk_companies_clients_email
-        CHECK(function.email(email)),
+        CHECK(functions.email(email)),
     
     CONSTRAINT chk_companies_clients_created_at
         CHECK(created_at <= CURRENT_TIMESTAMP)
