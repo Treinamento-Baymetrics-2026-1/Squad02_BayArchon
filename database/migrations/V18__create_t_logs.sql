@@ -19,5 +19,5 @@ CREATE TABLE IF NOT EXISTS logs.t_logs(
     --FOREIGN KEY
     CONSTRAINT fk_logs_user
         FOREIGN KEY(user_id)
-        REFERENCES registry.profiles(id)
+        REFERENCES registry.t_users(id)
 );
