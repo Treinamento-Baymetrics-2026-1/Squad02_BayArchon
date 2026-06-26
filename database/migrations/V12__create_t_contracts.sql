@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS documents.t_contracts(
     created_at          TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at          TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     type_id             INTEGER         NOT NULL,
-    client_id           INTEGER         NOT NULL,
+    client_id           UUID            NOT NULL,
 
     --PRIMARY KEY
     CONSTRAINT pk_contracts PRIMARY KEY(id),
@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS documents.t_contracts(
     --FOREIGN KEY
     CONSTRAINT fk_contracts_type
         FOREIGN KEY(type_id)
-        REFERENCES documents.contracts_types(id),
+        REFERENCES documents.t_contracts_types(id),
 
     CONSTRAINT fk_constracts_client
         FOREIGN KEY(client_id)
-        REFERENCES registry.companies_clients(id)
+        REFERENCES registry.t_companies_clients(id)
 );
