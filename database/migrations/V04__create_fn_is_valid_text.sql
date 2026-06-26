@@ -14,4 +14,4 @@ BEGIN
 
     RETURN length(v_clean) >= 3;
 END;
-$$;E
+$$;
