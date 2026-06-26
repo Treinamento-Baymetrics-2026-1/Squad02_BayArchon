@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS registry.t_sectors(
     details         VARCHAR(3000)   NOT NULL,
     created_at      TIMESTAMPTZ     NOT NULL      DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ     NOT NULL      DEFAULT CURRENT_TIMESTAMP,
-    deleted_at      TIMESTAMPTZ                   DEFAULT NULL,
+    deleted_at      TIMESTAMPTZ         NULL      DEFAULT NULL,
     is_deleted      BOOLEAN         NOT NULL      DEFAULT FALSE,
 
     --PRIMARY KEY
