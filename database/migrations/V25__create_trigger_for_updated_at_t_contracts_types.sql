@@ -1,0 +1,7 @@
+DROP TRIGGER IF EXISTS documents_t_contracts_types_trg_update_updated_at
+ON documents.t_contracts_types;
+
+CREATE TRIGGER documents_t_contracts_types_trg_update_updated_at
+BEFORE UPDATE ON documents.t_contracts_types
+FOR EACH ROW
+EXECUTE FUNCTION functions.fn_update_updated_at();
