@@ -8,11 +8,11 @@ CREATE TABLE IF NOT EXISTS documents.t_contracts_types(
         SEQUENCE NAME contracts_types_seq_id
     ),
 
-    display_name    VARCHAR(300)      NOT NULL,
+    display_name    VARCHAR(300)    NOT NULL,
     details         VARCHAR(3000)   NOT NULL,
     created_at      TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
-    deleted_at      TIMESTAMPTZ                 DEFAULT NULL,
+    deleted_at      TIMESTAMPTZ         NULL    DEFAULT NULL,
     is_deleted      BOOLEAN         NOT NULL    DEFAULT FALSE,
 
     --PRIMARY KEY
