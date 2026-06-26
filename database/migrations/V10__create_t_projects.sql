@@ -8,13 +8,13 @@ CREATE TABLE IF NOT EXISTS registry.t_projects(
         SEQUENCE NAME projects_seq_id
     ),
 
-    display_name            VARCHAR(300)    NOT NULL,
-    current_stage          CHAR(1)         NOT NULL,
-    details     VARCHAR(3000)   NOT NULL,
-    created_at      TIMESTAMPTZ     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at      TIMESTAMPTZ     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    client_id       INTEGER         NOT NULL,
-    category_id     INTEGER         NOT NULL,
+    display_name        VARCHAR(300)    NOT NULL,
+    current_stage       CHAR(1)         NOT NULL,
+    details             VARCHAR(3000)   NOT NULL,
+    created_at          TIMESTAMPTZ     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at          TIMESTAMPTZ     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    client_id           UUID            NOT NULL,
+    category_id         INTEGER         NOT NULL,
 
     --PRIMARY KEY
     CONSTRAINT pk_projects PRIMARY KEY(id),
@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS registry.t_projects(
     --FOREIGN KEY
     CONSTRAINT fk_projects_client
         FOREIGN KEY(client_id)
-        REFERENCES registry.companies_clients(id),
+        REFERENCES registry.t_companies_clients(id),
 
     CONSTRAINT fk_projects_category
         FOREIGN KEY(category_id)
-        REFERENCES registry.categories(id)
+        REFERENCES registry.t_categories(id)
 );
