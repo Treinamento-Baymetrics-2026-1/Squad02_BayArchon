@@ -22,8 +22,8 @@ import {
 const registerSchema = z.object({
   name: z.string().min(3, "O nome deve ter pelo menos 3 caracteres."),
   email: z.string().email("Digite um email válido."),
-  role: z.string().min(1, "Escolha um nível de acesso."),
-  department: z.string().min(1, "Escolha um setor."),
+  role: z.string().min(1, "Selecione um nível de acesso."),
+  department: z.string().min(1, "Selecione um setor."),
 });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
