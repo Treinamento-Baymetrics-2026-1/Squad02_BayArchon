@@ -26,11 +26,14 @@ BEGIN
 
             --Users
             'user_created',
+            'user_name_changed',
             'user_is_enabled_changed_to_active',
             'user_is_enabled_changed_to_on_leave',
             'user_is_enabled_changed_to_terminated',
-            'user_updated',
-            'user_deleted'
+            'user_access_level_changed_to_manager',
+	        'user_access_level_changed_to_administrator',
+            'user_soft_deleted',
+            'user_restored',
 
             --Sectors
             'sector_created',
