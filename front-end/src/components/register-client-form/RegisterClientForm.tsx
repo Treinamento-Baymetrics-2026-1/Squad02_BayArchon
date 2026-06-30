@@ -11,11 +11,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { formatCNPJ } from "@/utils/formatters";
 
 const registerClientSchema = z.object({
   name: z.string().min(3, "O nome deve ter pelo menos 3 caracteres."),
-  cnpj: z.string().min(14, "Digite um CNPJ válido."),
-   //ver se tiver mascara, pq aumenta para 18 caracteres
+  cnpj: z.string().length(18, "Digite um CNPJ válido."),
   email: z.string().email("Digite um email válido."),
 });
 
@@ -83,6 +83,10 @@ export function RegisterClientForm() {
                       : "border-cinza-medio focus-visible:border-cinza-medio"
                   }`}
                   {...field}
+                  onChange={(e) => {
+                    const maskedValue = formatCNPJ(e.target.value);
+                    field.onChange(maskedValue); 
+                  }}
                 />
               </FormControl>
               <FormMessage className="text-sm text-vermelho" />
