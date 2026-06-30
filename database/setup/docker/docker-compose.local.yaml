@@ -8,10 +8,10 @@ services:
     environment:
       FLYWAY_SCHEMAS: ops_flyway
     networks:
-      - local_net
+      - supabase_network_database
     volumes:
       - ../../migrations:/flyway/sql
 
 networks:
-  local_net:
-    driver: bridge
+  supabase_network_database:
+    external: true
