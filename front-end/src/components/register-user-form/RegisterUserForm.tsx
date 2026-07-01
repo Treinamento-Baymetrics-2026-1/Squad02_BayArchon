@@ -35,6 +35,8 @@ export function RegisterUserForm() {
     defaultValues: {
       name: "",
       email: "",
+      role: "",
+      department: "",
     },
   });
 
