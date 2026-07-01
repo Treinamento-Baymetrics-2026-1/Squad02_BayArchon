@@ -1,0 +1,7 @@
+DROP TRIGGER IF EXISTS registry_t_users_trg_log_situation_changed_to_terminated
+ON registry.t_users;
+
+CREATE TRIGGER registry_t_users_trg_log_situation_changed_to_terminated
+AFTER UPDATE ON registry.t_users
+FOR EACH ROW
+EXECUTE FUNCTION logs.fn_log_user_situation_changed_to_terminated();
