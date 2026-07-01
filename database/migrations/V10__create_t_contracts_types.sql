@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS documents.contracts_types(
         SEQUENCE NAME id_sequence_t_constracts_types
     ),
 
-    name            VARCHAR(300)      NOT NULL,
+    name            VARCHAR(?)      NOT NULL,
     description     VARCHAR(3000)   NOT NULL,
     created_at      TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
