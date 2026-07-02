@@ -3,6 +3,9 @@ import { Login } from "@/pages/login";
 import { RegisterUser } from "@/pages/registerUserForm";
 import { RegisterClient } from "@/pages/registerClientForm";
 
+import {AdminLayout} from "@/layouts/AdminLayout";
+import { AdminPage } from "@/pages/AdminPage";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -17,5 +20,18 @@ export const router = createBrowserRouter([
   {
     path: "/cadastro-cliente",
     element: <RegisterClient />,
+  },
+
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      {
+      index: true,
+      element: <AdminPage />,
+      },
+
+      // depois colocar a pagina de usuarios, cliente...
+    ],
   }
 ]);
