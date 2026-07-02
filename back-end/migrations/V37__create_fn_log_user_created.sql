@@ -10,7 +10,7 @@ AS $$
 BEGIN
     INSERT INTO logs.t_logs (
         performed_by,
-        target_user,
+        user_changed,
         action_type,
         details
     )   VALUES (

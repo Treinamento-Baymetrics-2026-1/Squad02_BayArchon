@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS registry.t_projects(
     created_at          TIMESTAMPTZ     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at          TIMESTAMPTZ     NOT NULL DEFAULT CURRENT_TIMESTAMP,
     client_id           UUID            NOT NULL,
+    sector_id           INTEGER         NOT NULL,
     category_id         INTEGER         NOT NULL,
 
     --PRIMARY KEY
@@ -33,6 +34,10 @@ CREATE TABLE IF NOT EXISTS registry.t_projects(
     CONSTRAINT fk_projects_client
         FOREIGN KEY(client_id)
         REFERENCES registry.t_companies_clients(id),
+
+    CONSTRAINT fk_projects_sector
+        FOREIGN KEY(sector_id)
+        REFERENCES registry.t_sectors(id),
 
     CONSTRAINT fk_projects_category
         FOREIGN KEY(category_id)

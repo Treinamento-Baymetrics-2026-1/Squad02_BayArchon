@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS documents.t_contracts(
+CREATE TABLE IF NOT EXISTS registry.t_contracts(
     id INTEGER GENERATED ALWAYS AS IDENTITY(
         START WITH 1
         INCREMENT BY 1
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS documents.t_contracts(
     --FOREIGN KEY
     CONSTRAINT fk_contracts_type
         FOREIGN KEY(type_id)
-        REFERENCES documents.t_contracts_types(id),
+        REFERENCES registry.t_contracts_types(id),
 
     CONSTRAINT fk_constracts_client
         FOREIGN KEY(client_id)

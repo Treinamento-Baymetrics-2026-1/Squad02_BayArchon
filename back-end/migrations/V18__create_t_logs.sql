@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS logs.t_logs(
 
     type_logs       logs.e_event_type_t_logs     NOT NULL,
     performed_by    UUID                             NULL,
-    target_user     UUID                             NULL, --Mudar o 'target'
+    user_changed    UUID                             NULL, --Mudar o 'target'
     details         JSONB                        NOT NULL,
     created_at      TIMESTAMPTZ                  NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 
@@ -19,10 +19,10 @@ CREATE TABLE IF NOT EXISTS logs.t_logs(
 
     --FOREIGN KEY
     CONSTRAINT fk_logs_perfomed_by
-        FOREIGN KEY(user_id)
-        REFERENCES registry.t_users(id)
+        FOREIGN KEY(performed_by)
+        REFERENCES registry.t_users(id),
 
-    CONSTRAINT fk_logs_target_user
-        FOREIGN KEY(user_id)
+    CONSTRAINT fk_logs_user_changed
+        FOREIGN KEY(user_changed)
         REFERENCES registry.t_users(id)
 );

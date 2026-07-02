@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS documents.t_contracts_types(
+CREATE TABLE IF NOT EXISTS registry.t_contracts_types(
     id INTEGER GENERATED ALWAYS AS IDENTITY(
         START WITH 1
         INCREMENT BY 1

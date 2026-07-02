@@ -11,7 +11,7 @@ BEGIN
             'created',
             'active',
             'on_leave',
-            '' --desativado
+            'disabled' --desativado
             'terminated'
         );
     END IF;

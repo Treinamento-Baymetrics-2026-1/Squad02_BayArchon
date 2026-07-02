@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION logs.fn_log_user_situation _changed_to_terminated()
+CREATE OR REPLACE FUNCTION logs.fn_log_user_situation_changed_to_terminated()
 RETURNS TRIGGER
 LANGUAGE plpgsql
 VOLATILE
@@ -13,7 +13,7 @@ BEGIN
 
         INSERT INTO logs.t_logs (
             performed_by,
-            target_user,
+            user_changed,
             action_type,
             details
         )

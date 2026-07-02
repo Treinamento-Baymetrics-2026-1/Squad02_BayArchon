@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS registry.t_users(
     is_deleted      BOOLEAN                         NOT NULL    DEFAULT FALSE,
     is_active       BOOLEAN                         NOT NULL,
     sector_id       INTEGER                         NOT NULL,
-    created_by      UUID                            NOT NULL,
+    created_by      UUID                                NULL,
 
     --PRIMARY KEY
     CONSTRAINT pk_profiles PRIMARY KEY(id),
