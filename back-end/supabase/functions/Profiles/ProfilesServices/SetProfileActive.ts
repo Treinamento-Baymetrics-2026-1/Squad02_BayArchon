@@ -1,6 +1,6 @@
 import { SupabaseClient } from "@supabase";
 
-export async function UpdateProfileStatusService(supabase : SupabaseClient){
+export async function SetProfileActive(supabase : SupabaseClient){
     
     const { data , error } = await supabase.auth.getUser();
 

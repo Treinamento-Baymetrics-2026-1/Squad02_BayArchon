@@ -1,8 +1,9 @@
 import { SupabaseClient } from "@supabase";
-import { AuthRegisterDTO } from "../AuthDto.ts";
+import { AuthRegisterSchema } from "../AuthSchema.ts"; 
 import { AccessLevelMapper } from "../AuthMapper.ts";
+import { z } from "zod";
 
-export async function RegisterService(supabase : SupabaseClient, registerData : AuthRegisterDTO){
+export async function RegisterService(supabase : SupabaseClient,registerData : z.infer<typeof AuthRegisterSchema>) {
 
     const {data, error} = await supabase.auth.admin.inviteUserByEmail(registerData.email,
         {
