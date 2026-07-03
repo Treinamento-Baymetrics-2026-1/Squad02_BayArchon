@@ -14,7 +14,7 @@ BEGIN
         INSERT INTO logs.t_logs (
             performed_by,
             user_changed,
-            action_type,
+            type_logs,
             details
         )
         VALUES (
