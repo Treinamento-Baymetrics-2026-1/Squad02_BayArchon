@@ -13,13 +13,13 @@ BEGIN
         INSERT INTO logs.t_logs (
             performed_by,
             user_changed,
-            action_type,
+            type_logs,
             details
         )
         VALUES (
             NEW.created_by,
             NEW.id,
-            'user_changed_name',
+            'user_name_changed',
             json_build_object(
                 'old_display_name', OLD.display_name,
                 'new_display_name', NEW.display_name,
