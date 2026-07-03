@@ -11,7 +11,7 @@ BEGIN
     INSERT INTO logs.t_logs (
         performed_by,
         user_changed,
-        action_type,
+        type_logs,
         details
     )   VALUES (
         NEW.created_by,
@@ -19,7 +19,7 @@ BEGIN
         'user_created',
         json_build_object(
             'display_name', NEW.display_name,
-            'situation', NEW.is_enabled,      
+            'situation', NEW.situation,      
             'access_level', NEW.access_level,
             'created_at', NEW.created_at, 
             'sector_id', NEW.sector_id       
