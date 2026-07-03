@@ -14,7 +14,7 @@ BEGIN
         INSERT INTO logs.t_logs (
             performed_by,
             user_changed,
-            action_type,
+            type_logs,
             details
         )
         VALUES (
@@ -22,8 +22,8 @@ BEGIN
             NEW.id,
             'user_situation_changed_to_terminated',
             json_build_object(
-                'old_situation ', OLD.situation ,
-                'new_situation ', NEW.situation ,
+                'old_situation', OLD.situation ,
+                'new_situation', NEW.situation ,
                 'updated_at', NEW.updated_at
             )
         );
