@@ -1,21 +1,20 @@
 CREATE TABLE IF NOT EXISTS registry.t_users(
     id              UUID						    NOT NULL,
     display_name    VARCHAR(150)                    NOT NULL,
-    situation       registry.e_situation_t_users    NOT NULL,
+    situation       registry.e_situation_t_users    NOT NULL    DEFAULT 'created',
     access_level    CHAR(1)                         NOT NULL,
     created_at      TIMESTAMPTZ                     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ                     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     deleted_at      TIMESTAMPTZ                         NULL    DEFAULT NULL,
     is_deleted      BOOLEAN                         NOT NULL    DEFAULT FALSE,
-    is_active       BOOLEAN                         NOT NULL,
     sector_id       INTEGER                         NOT NULL,
     created_by      UUID                                NULL,
 
     --PRIMARY KEY
-    CONSTRAINT pk_profiles PRIMARY KEY(id),
+    CONSTRAINT pk_users PRIMARY KEY(id),
 
     --CHECK
-    CONSTRAINT chk_profiles_name
+    CONSTRAINT chk_users_name
         CHECK(functions.fn_is_valid_name(display_name)),
 
     CONSTRAINT chk_profiles_access_level
