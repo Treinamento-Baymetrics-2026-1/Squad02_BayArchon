@@ -8,12 +8,12 @@ COST 1
 SET search_path = logs, pg_catalog
 AS $$
 BEGIN
-    IF OLD.situation = ''
+    IF OLD.situation = 'disabled'
         AND NEW.situation = 'active' THEN
         INSERT INTO logs.t_logs (
             performed_by,
             user_changed,
-            action_type,
+            type_logs,
             details
         )
         VALUES (
