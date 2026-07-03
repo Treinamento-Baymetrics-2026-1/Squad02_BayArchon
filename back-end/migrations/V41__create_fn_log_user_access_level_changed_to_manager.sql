@@ -9,12 +9,12 @@ SET search_path = logs, pg_catalog
 AS $$
 BEGIN
     IF OLD.access_level IS DISTINCT FROM NEW.access_level
-       AND NEW.access_level = 'M' THEN
+       AND NEW.access_level = 'm' THEN
 
         INSERT INTO logs.t_logs (
             performed_by,
             user_changed,
-            action_type,
+            type_logs,
             details
         )
         VALUES (
