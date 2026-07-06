@@ -16,6 +16,7 @@ BEGIN
         auth.uid(),
         'sector_created',
         json_build_object(
+            'id', NEW.id,
             'display_name', NEW.display_name,
             'details', NEW.details,  
             'is_deleted', NEW.is_deleted  
