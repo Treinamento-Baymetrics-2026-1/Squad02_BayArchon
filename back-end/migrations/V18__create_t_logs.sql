@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS logs.t_logs(
 
     type_logs       logs.e_event_type_t_logs     NOT NULL,
     performed_by    UUID                             NULL,
-    user_changed    UUID                             NULL, --Mudar o 'target'
+    user_changed    UUID                             NULL, 
     details         JSONB                        NOT NULL,
     created_at      TIMESTAMPTZ                  NOT NULL    DEFAULT CURRENT_TIMESTAMP,
 
