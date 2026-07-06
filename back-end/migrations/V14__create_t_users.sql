@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS registry.t_users(
     id              UUID						    NOT NULL,
     display_name    VARCHAR(150)                    NOT NULL,
     situation       registry.e_situation_t_users    NOT NULL    DEFAULT 'created',
-    access_level    CHAR(1)                         NOT NULL,
+    access_level    CHAR(1)                         NOT NULL    DEFAULT 'c',
     created_at      TIMESTAMPTZ                     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ                     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     deleted_at      TIMESTAMPTZ                         NULL    DEFAULT NULL,
