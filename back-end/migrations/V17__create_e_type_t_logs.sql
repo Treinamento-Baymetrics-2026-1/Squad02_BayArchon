@@ -48,7 +48,7 @@ BEGIN
 
             --Projects
             'project_current_stage_changed_to_in_progress',
-            'project_current_stage_changed_to_finished' -- colocar cada tipo de status
+            'project_current_stage_changed_to_finished', -- colocar cada tipo de status
             'project_created',
             'project_updated',
 
