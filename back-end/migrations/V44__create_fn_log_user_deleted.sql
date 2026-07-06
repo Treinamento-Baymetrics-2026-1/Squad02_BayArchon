@@ -30,7 +30,9 @@ BEGIN
                 'access_level', NEW.access_level,
                 'created_at', NEW.created_at, 
                 'updated_at', NEW.updated_at, 
-                'sector_id', NEW.sector_id    
+                'sector_id', NEW.sector_id,    
+                'deleted_at', NEW.deleted_at,
+                'is_deleted', NEW.is_deleted
             )
         );
         
