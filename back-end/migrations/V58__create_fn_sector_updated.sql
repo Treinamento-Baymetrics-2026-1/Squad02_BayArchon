@@ -16,10 +16,10 @@ BEGIN
         auth.uid(),
         'sector_updated',
         json_build_object(
-            'display_name', NEW.display_name,
-            'display_name', OLD.display_name,
-            'details', NEW.details,
-            'details', OLD.details  
+            'new_display_name', NEW.display_name,
+            'old_display_name', OLD.display_name,
+            'new_details', NEW.details,
+            'old_details', OLD.details  
         )
     );
     RETURN NEW;
