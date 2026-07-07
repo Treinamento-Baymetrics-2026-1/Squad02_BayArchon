@@ -58,7 +58,7 @@ export async function UpdateSectorService(supabase : SupabaseClient, sectorData 
     throw new Error("Error: " + error.message);
   }
 
-  const { id, ...updateSector} = sectorData;
+  const { id: _id, ...updateSector} = sectorData;
 
   const { error: updateError } = await supabase.schema('registry').from("t_sectors").update(updateSector).eq('id', sectorData.id);
 
