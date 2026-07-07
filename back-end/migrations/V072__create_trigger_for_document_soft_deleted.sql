@@ -10,4 +10,4 @@ WHEN(
         AND OLD.deleted_at IS NULL
         AND NEW.deleted_at IS NOT NULL
 )    
-EXECUTE FUNCTION logs.fn_log_document_soft_deleted();
+EXECUTE FUNCTION logs.fn_log_document_deleted();
