@@ -1,5 +1,5 @@
-import Search from "../../assets/icons/search.svg?react";
-import avatarImage from "../../assets/images/avatar-image.png";
+import Search from "../assets/icons/search.svg?react";
+import avatarImage from "../assets/images/avatar-image.png";
 
 export function Header() {
   return (
