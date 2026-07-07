@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION logs.fn_log_document_updated
+CREATE OR REPLACE FUNCTION logs.fn_log_document_updated()
 RETURNS TRIGGER
 LANGUAGE plpgsql
 VOLATILE
@@ -17,21 +17,37 @@ BEGIN
         'document_updated',
         json_build_object(
           'id', NEW.id,
+
           'new_title', NEW.title,
           'old_title', OLD.title,
 
-          'visibility', NEW.visibility,
+          'new_visibility', NEW.visibility,
           'old_visibility', OLD.visibility,
-          --TERMINAR
-          'extension', NEW.extension,
-          'source', NEW.source,
+
+          'new_extension', NEW.extension,
+          'old_extension', NEW.extension,
+
+          'new_source', NEW.source,
+          'old_source', NEW.source,
+
           'created_at', NEW.created_at,
-          'updated_at', NEW.updated_at, 
-          'category_id', NEW.category_id,
-          'responsible_id', NEW.responsible_id,
-          'sector_id', NEW.sector_id,
-          'client_id', NEW.client_id,
-          'project_id', NEW.project_id,
+          'updated_at', NEW.updated_at,
+
+          'new_category_id', NEW.category_id,
+          'old_category_id', NEW.category_id,
+
+          'new_responsible_id', NEW.responsible_id,
+          'old_responsible_id', NEW.responsible_id,
+
+          'new_sector_id', NEW.sector_id,
+          'old_sector_id', NEW.sector_id,
+
+          'new_client_id', NEW.client_id,
+          'old_client_id', NEW.client_id,
+
+          'new_project_id', NEW.project_id,
+          'old_project_id', NEW.project_id,
+
           'file_id', NEW.file_id
           
         )
