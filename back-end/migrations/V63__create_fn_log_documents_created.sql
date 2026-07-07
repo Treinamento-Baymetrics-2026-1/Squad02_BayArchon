@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION logs.fn_log_document_created
+CREATE OR REPLACE FUNCTION logs.fn_log_document_created()
 RETURNS TRIGGER
 LANGUAGE plpgsql
 VOLATILE
