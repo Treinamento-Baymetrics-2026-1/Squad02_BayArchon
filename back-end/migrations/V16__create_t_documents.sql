@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
     sector_id       INTEGER                                     NULL,
     client_id       UUID                                        NULL,
     project_id      INTEGER                                     NULL,
-    object_id       UUID                                    NOT NULL,
+    file_id       UUID                                      NOT NULL,
 
     --PRIMARY KEY
     CONSTRAINT pk_documents PRIMARY KEY(id),
@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
         FOREIGN KEY(project_id)
         REFERENCES registry.t_projects(id),
 
-    CONSTRAINT fk_documents_object
-        FOREIGN KEY(object_id)
+    CONSTRAINT fk_documents_file
+        FOREIGN KEY(file_id)
         REFERENCES storage.objects(id)
 
 );
