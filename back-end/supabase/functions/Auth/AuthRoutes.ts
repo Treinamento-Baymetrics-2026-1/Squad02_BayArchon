@@ -9,4 +9,5 @@ authRoutes.post("/admin/register", Register)
 authRoutes.post("/user/first-access", FirstAccess)
 
 
+
 export default authRoutes;
