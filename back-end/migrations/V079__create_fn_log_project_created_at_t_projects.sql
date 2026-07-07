@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION logs.fn_log_category_updated()
+CREATE OR REPLACE FUNCTION logs.fn_log_project_created()
 RETURNS TRIGGER
 LANGUAGE plpgsql
 VOLATILE
@@ -14,17 +14,16 @@ BEGIN
         details
     )   VALUES(
         auth.uid(),
-        'category_updated',
+        'project_created',
         json_build_object(
             'id', NEW.id,
-            'new_display_name', NEW.display_name,
-            'old_display_name', OLD.display_name,
-
-            'new_details', NEW.details,
-            'old_details', OLD.details,
-
+            'display_name', NEW.display_name,
+            'current_stage', NEW.current_stage,
+            'details', NEW.details,
             'created_at', NEW.created_at,
-            'updated_at', NEW.updated_at
+            'client_id', NEW.client_id,
+            'sector_id', NEW.sector_id,
+            'category_id', NEW.category_id
             
         )
     );
