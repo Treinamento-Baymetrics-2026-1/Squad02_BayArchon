@@ -30,9 +30,6 @@ BEGIN
           'new_source', NEW.source,
           'old_source', NEW.source,
 
-          'created_at', NEW.created_at,
-          'updated_at', NEW.updated_at,
-
           'new_category_id', NEW.category_id,
           'old_category_id', NEW.category_id,
 
@@ -48,7 +45,9 @@ BEGIN
           'new_project_id', NEW.project_id,
           'old_project_id', NEW.project_id,
 
-          'file_id', NEW.file_id
+          'file_id', NEW.file_id,
+
+           'updated_at', NEW.updated_at
           
         )
     );
