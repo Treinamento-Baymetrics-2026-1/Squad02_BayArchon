@@ -20,8 +20,11 @@ BEGIN
             'contract_created',
             'contract_expired',
             'contract_updated',
+
+            --Contracts type
             'contract_type_created',
             'contract_type_updated',
+            'contract_type_deleted',
 
 
             --Users
