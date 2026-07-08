@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "type-check": "tsc -b",
+    "test:ci": "echo 'Nenhum teste configurado ainda' && exit 0",
     "preview": "vite preview",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"", 
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
