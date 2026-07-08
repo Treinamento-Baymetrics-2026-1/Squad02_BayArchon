@@ -9,7 +9,7 @@ const supabaseRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "ERROR";
 
 export const supabase = createClient(supabaseUrl, supabaseRoleKey);
 
-export async function getSupabaseClient(context : Context){
+export function getSupabaseClient(context : Context){
 
     const supabaseClient  = createClient(supabaseUrl, supabaseRoleKey, {
         global: {
