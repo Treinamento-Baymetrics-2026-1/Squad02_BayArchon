@@ -19,8 +19,6 @@ BEGIN
             'id', NEW.id,
             'display_name', NEW.display_name,
             'details', NEW.details,
-            'created_at', NEW.created_at,
-            'updated_at', NEW.updated_at,
             'deleted_at', NEW.deleted_at,
             'is_deleted', NEW.is_deleted
 

@@ -1,7 +1,7 @@
-DROP TRIGGER IF EXISTS registry_t_projects_trg_log_project_current_stage_changed_to_p
+DROP TRIGGER IF EXISTS registry_t_projects_trg_log_current_stage_changed_to_progress
 ON registry.t_projects;
 
-CREATE TRIGGER registry_t_projects_trg_log_project_current_stage_changed_to_p
+CREATE TRIGGER registry_t_projects_trg_log_current_stage_changed_to_progress
 AFTER UPDATE ON registry.t_projects
 FOR EACH ROW
 WHEN(

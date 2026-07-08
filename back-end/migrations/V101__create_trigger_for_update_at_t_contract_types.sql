@@ -1,7 +1,7 @@
-DROP TRIGGER IF EXISTS registry_t_contracts_types_trg_log_contract_type_updated
+DROP TRIGGER IF EXISTS registry_t_contracts_types_trg_log_updated
 ON registry.t_contracts_types;
 
-CREATE TRIGGER registry_t_contracts_types_trg_log_contract_type_updated
+CREATE TRIGGER registry_t_contracts_types_trg_log_updated
 AFTER UPDATE ON registry.t_contracts_types
 FOR EACH ROW
 WHEN(

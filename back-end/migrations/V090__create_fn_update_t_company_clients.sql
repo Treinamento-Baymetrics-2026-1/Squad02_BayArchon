@@ -28,7 +28,7 @@ BEGIN
             'old_cnpj', OLD.cnpj,
 
             'new_email', NEW.email,
-            'old_email', OLD.email
+            'old_email', OLD.email,
            
             'updated_at', NEW.updated_at
             

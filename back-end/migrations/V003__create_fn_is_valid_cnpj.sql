@@ -28,10 +28,10 @@ BEGIN
         RETURN FALSE;
     END IF;
 
-    -- Converte os dígitos uma única vez
+    -- Converte os dígitos em um array
     v_digits_array := ARRAY(
-        SELECT SUBSTRING(v_digits FROM v_digit_position FOR 1)::INTEGER
-        FROM generate_series(1, 14) AS v_digit_position
+        SELECT SUBSTRING(v_digits FROM pos FOR 1)::SMALLINT
+        FROM generate_series(1, 14) AS pos
     );
 
     -- Primeiro dígito verificador
@@ -49,10 +49,12 @@ BEGIN
     END LOOP;
 
     v_digit1 := v_total % 11;
-    v_digit1 := CASE
-                    WHEN v_digit1 < 2 THEN 0
-                    ELSE 11 - v_digit1
-                END;
+
+    IF v_digit1 < 2 THEN
+        v_digit1 := 0;
+    ELSE
+        v_digit1 := 11 - v_digit1;
+    END IF;
 
     -- Segundo dígito verificador
     v_total := 0;
@@ -69,10 +71,12 @@ BEGIN
     END LOOP;
 
     v_digit2 := v_total % 11;
-    v_digit2 := CASE
-                    WHEN v_digit2 < 2 THEN 0
-                    ELSE 11 - v_digit2
-                END;
+
+    IF v_digit2 < 2 THEN
+        v_digit2 := 0;
+    ELSE
+        v_digit2 := 11 - v_digit2;
+    END IF;
 
     RETURN v_digit1 = v_digits_array[13]
        AND v_digit2 = v_digits_array[14];

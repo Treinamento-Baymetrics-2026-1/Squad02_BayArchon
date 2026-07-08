@@ -20,7 +20,8 @@ BEGIN
             'display_name', NEW.display_name,
             'is_enabled', NEW.is_enabled,
             'cnpj', NEW.cnpj,
-            'email', NEW.email
+            'email', NEW.email,
+            'created_at', NEW.created_at
         )
     );
     RETURN NEW;

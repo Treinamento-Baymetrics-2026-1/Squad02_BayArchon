@@ -14,7 +14,7 @@ BEGIN
         details
     )   VALUES(
         auth.uid(),
-        'contract_type_updated',
+        'contract_type_created',
         json_build_object(
             'id', NEW.id,
             'display_name', NEW.display_name,

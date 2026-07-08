@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS registry.t_companies_clients(
     id              UUID            NOT NULL    DEFAULT gen_random_uuid() ,
     display_name    VARCHAR(200)    NOT NULL,
-    is_enabled          CHAR(1)     NOT NULL,
+    is_enabled          CHAR(1)     NOT NULL    DEFAULT 'A',
     cnpj            VARCHAR(14)     NOT NULL,
     email           VARCHAR(320)    NOT NULL,
     created_at      TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,

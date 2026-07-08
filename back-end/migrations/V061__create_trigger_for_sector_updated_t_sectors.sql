@@ -1,7 +1,7 @@
-DROP TRIGGER IF EXISTS registry_t_sectors_trg_log_sector_updated
+DROP TRIGGER IF EXISTS registry_t_sectors_trg_log_updated
 ON registry.t_sectors;
 
-CREATE TRIGGER registry_t_sectors_trg_log_sector_updated
+CREATE TRIGGER registry_t_sectors_trg_log_updated
 AFTER UPDATE ON registry.t_sectors
 FOR EACH ROW
 WHEN(

@@ -19,8 +19,7 @@ BEGIN
             'id', NEW.id,
             'display_name', NEW.display_name,
             'details', NEW.details,
-            'created_at', NEW.created_at,
-            'updated_at', NEW.updated_at
+            'created_at', NEW.created_at
 
         )
     );

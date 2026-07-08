@@ -21,7 +21,6 @@ BEGIN
           'visibility', NEW.visibility,
           'extension', NEW.extension,
           'source', NEW.source,
-          'created_at', NEW.created_at,
           'updated_at', NEW.updated_at, 
           'category_id', NEW.category_id,
           'responsible_id', NEW.responsible_id,
