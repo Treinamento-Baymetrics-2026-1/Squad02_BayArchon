@@ -16,4 +16,5 @@ authRoutes.post("/update-password", UpdatePassword)
 
 
 
+
 export default authRoutes;
