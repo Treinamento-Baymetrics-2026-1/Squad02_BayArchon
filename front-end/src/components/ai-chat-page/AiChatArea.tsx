@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import SendIcon from "../../assets/icons/SendIcon.svg?react";
-import SparklesIcon from "../../assets/icons/sparklesIcon.svg?react";
+import SparklesIcon from "../../assets/icons/SparklesIcon.svg?react";
 import CopyIcon from "../../assets/icons/CopyIcon.svg?react";
 import ThumbsUpIcon from "../../assets/icons/ThumbsUpIcon.svg?react";
 import ThumbsDownIcon from "../../assets/icons/ThumbsDownIcon.svg?react";
