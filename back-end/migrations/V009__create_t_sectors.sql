@@ -18,7 +18,6 @@ CREATE TABLE IF NOT EXISTS registry.t_sectors(
     --PRIMARY KEY
     CONSTRAINT pk_sectors PRIMARY KEY(id),
 
-
     --CHECK
     CONSTRAINT chk_sectors_display_name
         CHECK(functions.fn_is_valid_name(display_name)),
