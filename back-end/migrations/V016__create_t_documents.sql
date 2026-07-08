@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
     sector_id       INTEGER                                     NULL,
     client_id       UUID                                        NULL,
     project_id      INTEGER                                     NULL,
-    file_id       UUID                                      NOT NULL,
+    file_id         UUID                                    NOT NULL,
 
     --PRIMARY KEY
     CONSTRAINT pk_documents PRIMARY KEY(id),
