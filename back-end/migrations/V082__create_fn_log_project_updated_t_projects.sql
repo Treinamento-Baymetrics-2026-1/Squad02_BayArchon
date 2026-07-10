@@ -27,20 +27,19 @@ BEGIN
             'new_details', NEW.details,
             'old_details', OLD.details,
 
-            'new_current_stage', OLD.current_stage,
+            'new_current_stage', NEW.current_stage,
             'old_current_stage', OLD.current_stage,
 
             'new_client_id', NEW.client_id,
-            'old_client_id', NEW.client_id,
+            'old_client_id', old.client_id,
 
             'new_sector_id', NEW.sector_id,
             'old_sector_id', OLD.sector_id,
 
-            'new_category_id', NEW.category_id
-            'old_category_id', OLD.category_id
+            'new_category_id', NEW.category_id,
+            'old_category_id', OLD.category_id,
 
-            'updated_at', NEW.updated_at,
-            'created_at', NEW.created_at
+            'updated_at', NEW.updated_at
             
         )
     );
