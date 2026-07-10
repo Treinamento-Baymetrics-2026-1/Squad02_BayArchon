@@ -22,8 +22,7 @@ BEGIN
 
             'new_details', NEW.details,
             'old_details', OLD.details,
-
-            'created_at', NEW.created_at,
+            
             'updated_at', NEW.updated_at
             
         )
