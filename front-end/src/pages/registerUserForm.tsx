@@ -10,7 +10,6 @@ export function RegisterUser() {
       </header>
       <main className="flex-1 flex items-center justify-center p-4">
         <Card className="w-full max-w-[563px] rounded-2xl bg-offwhite border-2 border-bordaoff-white ring-0 outline-none shadow-xl">
-          
           <CardHeader className="px-9 pt-9 pb-4">
             <CardTitle className="text-[22px] font-bold text-azul-marinho">
               Cadastro
@@ -24,7 +23,6 @@ export function RegisterUser() {
           <CardContent className="px-9 pb-9">
             <RegisterUserForm />
           </CardContent>
-          
         </Card>
       </main>
     </div>

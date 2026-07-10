@@ -3,15 +3,16 @@ import { Login } from "@/pages/login";
 import { RegisterUser } from "@/pages/registerUserForm";
 import { RegisterClient } from "@/pages/registerClientForm";
 
-import {AdminLayout} from "@/layouts/AdminLayout";
+import { AdminLayout } from "@/layouts/AdminLayout";
 import { AdminPage } from "@/pages/AdminPage";
+import { AiChatPage } from "@/pages/AiChatPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
   },
-  
+
   {
     path: "/cadastro",
     element: <RegisterUser />,
@@ -27,11 +28,13 @@ export const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-      index: true,
-      element: <AdminPage />,
+        index: true,
+        element: <AdminPage />,
       },
-
-      // depois colocar a pagina de usuarios, cliente...
+      {
+        path: "chat",
+        element: <AiChatPage />,
+      },
     ],
-  }
+  },
 ]);

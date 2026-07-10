@@ -17,3 +17,17 @@ export const AuthFirstAccessSchema = z
     path: ["confirm_password"]
   });
 
+export const AuthLoginSchema = z.object({
+    email: z.string().email(),
+    password: z
+    .string()
+    .min(8)
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+      "A senha deve conter no mínimo um elemento de cada conjunto: abcdefghijklmnopqrstuvwxyz, ABCDEFGHIJKLMNOPQRSTUVWXYZ, 0123456789."
+    ),
+});
+
+export const AuthRedefinePasswordSchema = z.object({
+  email: z.string().email()
+})
