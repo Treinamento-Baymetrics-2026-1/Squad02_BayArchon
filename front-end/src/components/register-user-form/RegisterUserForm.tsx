@@ -46,8 +46,11 @@ export function RegisterUserForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
-        
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6"
+        noValidate
+      >
         <FormField
           control={form.control}
           name="name"
@@ -73,7 +76,6 @@ export function RegisterUserForm() {
           )}
         />
 
-        {/* Email */}
         <FormField
           control={form.control}
           name="email"
@@ -98,7 +100,7 @@ export function RegisterUserForm() {
             </FormItem>
           )}
         />
-        
+
         <FormField
           control={form.control}
           name="role"
@@ -134,7 +136,6 @@ export function RegisterUserForm() {
           )}
         />
 
-
         <FormField
           control={form.control}
           name="department"
@@ -160,7 +161,7 @@ export function RegisterUserForm() {
                   sideOffset={4}
                   className="w-[var(--radix-select-trigger-width)] border-2 border-cinza-medio rounded-xl bg-white shadow-md"
                 >
-                  <SelectItem value="ti">TI</SelectItem> 
+                  <SelectItem value="ti">TI</SelectItem>
                   <SelectItem value="rh">RH</SelectItem>
                   <SelectItem value="financeiro">Financeiro</SelectItem>
                 </SelectContent>
