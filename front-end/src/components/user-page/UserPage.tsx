@@ -1,5 +1,5 @@
-import Search from "../../assets/icons/Search.svg?react";
-import Plus from "../../assets/icons/Plus.svg?react";
+import Search from "../../assets/icons/plus.svg?react";
+import Plus from "../../assets/icons/plus.svg?react";
 
 interface UserPageFiltersProps {
   onCreateClick: () => void;
