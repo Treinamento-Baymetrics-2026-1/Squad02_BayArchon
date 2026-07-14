@@ -6,6 +6,7 @@ import { RegisterClient } from "@/pages/registerClientForm";
 import { AdminLayout } from "@/layouts/AdminLayout";
 import { AdminPage } from "@/pages/AdminPage";
 import { AiChatPage } from "@/pages/AiChatPage";
+import { UserPage } from "@/pages/UserPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "chat",
         element: <AiChatPage />,
+      },
+      {
+        path: "usuarios",
+        element: <UserPage />,
       },
     ],
   },
