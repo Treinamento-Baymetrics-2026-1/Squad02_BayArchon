@@ -1,0 +1,5 @@
+DROP TRIGGER IF EXISTS registry_t_company_clients_trg_log_is_enabled_changed_to_a
+ON registry.t_companies_clients;
+
+DROP TRIGGER IF EXISTS registry_t_company_clients_trg_log_is_enabled_changed_to_t
+ON registry.t_companies_clients;

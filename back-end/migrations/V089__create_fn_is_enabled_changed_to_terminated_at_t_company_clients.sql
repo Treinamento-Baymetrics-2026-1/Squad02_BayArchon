@@ -18,6 +18,7 @@ BEGIN
         json_build_object(
             'id', NEW.id,
             'display_name', NEW.display_name,
+            'details', NEW.details,
             'new_is_enabled', NEW.is_enabled,
             'old_is_enabled', OLD.is_enabled,
             'updated_at', NEW.updated_at

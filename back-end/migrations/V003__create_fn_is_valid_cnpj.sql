@@ -5,41 +5,55 @@ IMMUTABLE
 AS
 $$
 DECLARE
-    v_digits          CHAR(14);
-    v_digits_array    SMALLINT[];
-    v_total           SMALLINT;
-    v_weight          SMALLINT;
-    v_digit1          SMALLINT;
-    v_digit2          SMALLINT;
-    v_digit_position  SMALLINT;
+    v_cnpj            CHAR(14);
+    v_values          INTEGER[];
+    v_sum             INTEGER;
+    v_weight          INTEGER;
+    v_digit1          INTEGER;
+    v_digit2          INTEGER;
+    v_position        INTEGER;
+    v_char            CHAR(1);
 BEGIN
-    v_digits := p_cnpj;
-
-    IF length(v_digits) <> 14 THEN
+    IF p_cnpj IS NULL THEN
         RETURN FALSE;
     END IF;
 
-    IF v_digits !~ '^[0-9]{14}$' THEN
+    v_cnpj := upper(p_cnpj);
+
+    IF length(v_cnpj) <> 14 THEN
         RETURN FALSE;
     END IF;
 
-    -- Rejeita sequência repetida
-    IF v_digits ~ '^(.)\1{13}$' THEN
+    -- Primeiros 12 caracteres alfanuméricos e últimos 2 numéricos
+    IF v_cnpj !~ '^[A-Z0-9]{12}[0-9]{2}$' THEN
         RETURN FALSE;
     END IF;
 
-    -- Converte os dígitos em um array
-    v_digits_array := ARRAY(
-        SELECT SUBSTRING(v_digits FROM pos FOR 1)::SMALLINT
-        FROM generate_series(1, 14) AS pos
-    );
+    -- Rejeita sequência repetida (AAAAAAAAAAAA11, 11111111111111, etc.)
+    IF substring(v_cnpj, 1, 12) ~ '^([A-Z0-9])\1{11}$' THEN
+        RETURN FALSE;
+    END IF;
 
-    -- Primeiro dígito verificador
-    v_total := 0;
+    v_values := ARRAY[]::INTEGER[];
+
+    FOR v_position IN 1..14 LOOP
+        v_char := substring(v_cnpj FROM v_position FOR 1);
+
+        IF v_char BETWEEN '0' AND '9' THEN
+            v_values := array_append(v_values, ascii(v_char) - ascii('0'));
+        ELSE
+            -- Conforme especificação da Receita: ASCII - 48
+            v_values := array_append(v_values, ascii(v_char) - 48);
+        END IF;
+    END LOOP;
+
+    -- Primeiro DV
+
+    v_sum := 0;
     v_weight := 5;
 
-    FOR v_digit_position IN 1..12 LOOP
-        v_total := v_total + (v_digits_array[v_digit_position] * v_weight);
+    FOR v_position IN 1..12 LOOP
+        v_sum := v_sum + (v_values[v_position] * v_weight);
 
         v_weight := v_weight - 1;
 
@@ -48,7 +62,7 @@ BEGIN
         END IF;
     END LOOP;
 
-    v_digit1 := v_total % 11;
+    v_digit1 := v_sum % 11;
 
     IF v_digit1 < 2 THEN
         v_digit1 := 0;
@@ -56,12 +70,13 @@ BEGIN
         v_digit1 := 11 - v_digit1;
     END IF;
 
-    -- Segundo dígito verificador
-    v_total := 0;
+    -- Segundo DV
+
+    v_sum := 0;
     v_weight := 6;
 
-    FOR v_digit_position IN 1..13 LOOP
-        v_total := v_total + (v_digits_array[v_digit_position] * v_weight);
+    FOR v_position IN 1..12 LOOP
+        v_sum := v_sum + (v_values[v_position] * v_weight);
 
         v_weight := v_weight - 1;
 
@@ -70,7 +85,9 @@ BEGIN
         END IF;
     END LOOP;
 
-    v_digit2 := v_total % 11;
+    v_sum := v_sum + (v_digit1 * 2);
+
+    v_digit2 := v_sum % 11;
 
     IF v_digit2 < 2 THEN
         v_digit2 := 0;
@@ -78,7 +95,7 @@ BEGIN
         v_digit2 := 11 - v_digit2;
     END IF;
 
-    RETURN v_digit1 = v_digits_array[13]
-       AND v_digit2 = v_digits_array[14];
+    RETURN v_digit1 = v_values[13]
+       AND v_digit2 = v_values[14];
 END;
 $$;
