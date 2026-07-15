@@ -94,7 +94,7 @@ export function Sidebar() {
         <NavItem
           to="/admin/clientes"
           icon={clienteIcon}
-          text="Clientes..."
+          text="Clientes"
           isExpanded={isExpanded}
         />
         <NavItem
@@ -111,7 +111,7 @@ export function Sidebar() {
           isExpanded={isExpanded}
         />
         <NavItem
-          to="#"
+          to="/admin/lixeira"
           icon={lixeiraIcon}
           text="Lixeira"
           isExpanded={isExpanded}
