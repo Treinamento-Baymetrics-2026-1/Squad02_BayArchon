@@ -120,7 +120,7 @@ export function Sidebar() {
         {/* <div className="flex-1"></div> */}
 
         <NavItem
-          to="#"
+          to="/admin/configuracoes"
           icon={configuracaoIcon}
           text="Configuração"
           isExpanded={isExpanded}

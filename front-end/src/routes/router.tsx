@@ -7,6 +7,7 @@ import { AdminLayout } from "@/layouts/AdminLayout";
 import { AdminPage } from "@/pages/AdminPage";
 import { AiChatPage } from "@/pages/AiChatPage";
 import { UserPage } from "@/pages/UserPage";
+import { ConstructionPage } from "@/pages/ConstructionPage";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,22 @@ export const router = createBrowserRouter([
       {
         path: "usuarios",
         element: <UserPage />,
+      },
+      {
+        path: "clientes",
+        element: <ConstructionPage title="Clientes" />,
+      },
+      {
+        path: "setores",
+        element: <ConstructionPage title="Setores" />,
+      },
+      {
+        path: "lixeira",
+        element: <ConstructionPage title="Lixeira" />,
+      },
+      {
+        path: "configuracoes", 
+        element: <ConstructionPage title="Configurações" />,
       },
     ],
   },
