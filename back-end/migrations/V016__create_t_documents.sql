@@ -2,10 +2,11 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
     id              UUID                                    NOT NULL    DEFAULT gen_random_uuid(),
     title           VARCHAR(300)                            NOT NULL,
     visibility      documents.e_visibility_t_documents      NOT NULL,
-    extension       VARCHAR(10)                             NOT NULL,
     source          CHAR(1)                                 NOT NULL,
     created_at      TIMESTAMPTZ                             NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ                             NOT NULL    DEFAULT CURRENT_TIMESTAMP,
+    is_in_trash     BOOLEAN                                 NOT NULL    DEFAULT FALSE,
+    trashed_at      TIMESTAMPTZ                                 
     deleted_at      TIMESTAMPTZ                                 NULL    DEFAULT NULL,
     is_deleted      BOOLEAN                                 NOT NULL    DEFAULT FALSE,
     updated_by      UUID                                    NOT NULL,
@@ -15,7 +16,7 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
     sector_id       INTEGER                                     NULL,
     client_id       UUID                                        NULL,
     project_id      INTEGER                                     NULL,
-    file_id         UUID                                    NOT NULL,
+    --Adicionar campo directory_id
 
     --PRIMARY KEY
     CONSTRAINT pk_documents PRIMARY KEY(id),
@@ -27,16 +28,12 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
     CONSTRAINT chk_documents_source_
         CHECK (source IN ('i','e')),
 
-    CONSTRAINT chk_documents_extension
-        CHECK (extension IN ('pdf','xml','txt','docx')),
-
     CONSTRAINT chk_documents_nullity
         CHECK 
         (
             (
                 source = 'i'
                 AND responsible_id IS NOT NULL
-                AND sector_id IS NOT NULL
                 AND client_id IS NULL
                 AND project_id IS NULL
             )
@@ -44,7 +41,6 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
             (
                 source = 'e'
                 AND responsible_id IS NULL
-                AND sector_id IS NULL
                 AND client_id IS NOT NULL
                 AND project_id IS NOT NULL
             )
@@ -86,9 +82,5 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
     CONSTRAINT fk_documents_project
         FOREIGN KEY(project_id)
         REFERENCES registry.t_projects(id),
-
-    CONSTRAINT fk_documents_file
-        FOREIGN KEY(file_id)
-        REFERENCES storage.objects(id)
 
 );
