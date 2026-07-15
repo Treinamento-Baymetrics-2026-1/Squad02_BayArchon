@@ -31,7 +31,7 @@ BEGIN
             'old_current_stage', OLD.current_stage,
 
             'new_client_id', NEW.client_id,
-            'old_client_id', old.client_id,
+            'old_client_id', OLD.client_id,
 
             'new_sector_id', NEW.sector_id,
             'old_sector_id', OLD.sector_id,
