@@ -22,9 +22,6 @@ CREATE TABLE IF NOT EXISTS registry.t_companies_clients(
     CONSTRAINT chk_companies_clients_details
         CHECK(functions.fn_is_valid_text(details)),
 
-    CONSTRAINT chk_companies_clients_status
-        CHECK(is_enabled IN('A','T')),
-
     CONSTRAINT chk_companies_clients_cnpj
         CHECK(functions.fn_is_valid_cnpj(cnpj)),
 
