@@ -5,10 +5,14 @@ import { Pagination } from "../components/ui/pagination";
 import { UserTable, type User } from "../components/user-page/UserTable";
 import { UserPageFilters } from "../components/user-page/UserPage";
 import { UserModal } from "../components/user-page/UserModal";
+import { ConfirmDeleteModal } from "../components/ui/deletemodal";
 
 export function UserPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<User | null>(null);
 
   const handleOpenCreate = () => {
     setUserToEdit(null);
@@ -18,6 +22,17 @@ export function UserPage() {
   const handleOpenEdit = (user: User) => {
     setUserToEdit(user);
     setIsModalOpen(true);
+  };
+
+  const handleOpenDelete = (user: User) => {
+    setUserToDelete(user);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log("Excluindo o usuário:", userToDelete?.name);
+    setIsDeleteModalOpen(false);
+    setUserToDelete(null);
   };
 
   return (
@@ -42,7 +57,7 @@ export function UserPage() {
       <UserPageFilters onCreateClick={handleOpenCreate} />
 
       <div className="w-full mb-6">
-        <UserTable onEditClick={handleOpenEdit} />
+        <UserTable onEditClick={handleOpenEdit} onDeleteClick={handleOpenDelete} />
       </div>
 
       <Pagination />
@@ -52,6 +67,13 @@ export function UserPage() {
         onClose={() => setIsModalOpen(false)}
         user={userToEdit}
       />
+
+      <ConfirmDeleteModal 
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+      />
+
     </div>
   );
 }

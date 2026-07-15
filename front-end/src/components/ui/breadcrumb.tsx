@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+import ChevronRight from "../../assets/icons/chevron-right.svg?react";;
 import { Link } from "react-router-dom";
 
 interface BreadcrumbProps {

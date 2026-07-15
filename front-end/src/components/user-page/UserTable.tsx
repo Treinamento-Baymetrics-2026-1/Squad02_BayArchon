@@ -80,9 +80,10 @@ const mockUsers: User[] = [
 
 interface UserTableProps {
   onEditClick: (user: User) => void;
+  onDeleteClick: (user: User) => void;
 }
 
-export function UserTable({ onEditClick }: UserTableProps) {
+export function UserTable({ onEditClick, onDeleteClick }: UserTableProps) {
   return (
     <div className="w-full bg-white border border-bordaoff-white rounded-xl shadow-sm overflow-hidden flex flex-col">
       <div className="w-full overflow-x-auto">
@@ -134,6 +135,7 @@ export function UserTable({ onEditClick }: UserTableProps) {
                     </button>
 
                     <button
+                      onClick={() => onDeleteClick(user)}
                       className="hover:text-vermelho transition-colors"
                       title="Excluir"
                     >

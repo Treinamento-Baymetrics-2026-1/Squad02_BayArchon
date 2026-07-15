@@ -1,30 +1,28 @@
-// src/services/auth.service.ts
-
-export interface RegisterPayload {
+export type RegisterPayload = {
   email: string;
   name: string;
   sector_id: number;
   access_level: string;
-}
+};
 
 export async function registerUserAPI(data: RegisterPayload) {
-  // SIMULAÇÃO (MOCK): Espera 2 segundos para fingir que foi na nuvem
-  await new Promise(resolve => setTimeout(resolve, 2000));
 
-  // Simula um erro de e-mail repetido (descomente para testar o erro na tela)
-  // throw new Error("Esse e-mail já está cadastrado.");
+  const API_URL = import.meta.env.VITE_SUPABASE_URL;
+  const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-  // Simula o sucesso
-  console.log("Enviado para o backend:", data);
-  return { success: true, message: "Usuário cadastrado com sucesso!" };
-
-  /* QUANDO O LUCAS TERMINAR, VOCÊ APAGA A SIMULAÇÃO ACIMA E DESCOMENTA ABAIXO:
-  const response = await fetch('URL_DO_LUCAS', {
+  const response = await fetch(`${API_URL}/Auth/admin/register`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ...' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${SUPABASE_KEY}` 
+    },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error('Erro ao cadastrar');
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Erro ao cadastrar usuário na API.');
+  }
+
   return response.json();
-  */
 }
