@@ -8,7 +8,7 @@ BEGIN
           AND table_name = 't_companies_clients'
           AND column_name = 'is_enabled'
     ) THEN
-        ALTER TABLE companies.t_clients
+        ALTER TABLE registry.t_companies_clients
             DROP COLUMN is_enabled;
     END IF;
 
