@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
     created_at      TIMESTAMPTZ                             NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at      TIMESTAMPTZ                             NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     is_in_trash     BOOLEAN                                 NOT NULL    DEFAULT FALSE,
-    trashed_at      TIMESTAMPTZ                                 
+    trashed_at      TIMESTAMPTZ                                 NULL    DEFAULT NULL,
     deleted_at      TIMESTAMPTZ                                 NULL    DEFAULT NULL,
     is_deleted      BOOLEAN                                 NOT NULL    DEFAULT FALSE,
     updated_by      UUID                                    NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
     sector_id       INTEGER                                     NULL,
     client_id       UUID                                        NULL,
     project_id      INTEGER                                     NULL,
-    --Adicionar campo directory_id
+    --Campo directory_id na migration 128
 
     --PRIMARY KEY
     CONSTRAINT pk_documents PRIMARY KEY(id),
