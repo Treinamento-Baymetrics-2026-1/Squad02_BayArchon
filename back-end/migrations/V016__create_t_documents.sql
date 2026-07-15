@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS documents.t_documents (
+CREATE TABLE IF NOT EXISTS documents.t_documents(
     id              UUID                                    NOT NULL    DEFAULT gen_random_uuid(),
     title           VARCHAR(300)                            NOT NULL,
     visibility      documents.e_visibility_t_documents      NOT NULL,
@@ -81,6 +81,6 @@ CREATE TABLE IF NOT EXISTS documents.t_documents (
 
     CONSTRAINT fk_documents_project
         FOREIGN KEY(project_id)
-        REFERENCES registry.t_projects(id),
+        REFERENCES registry.t_projects(id)
 
 );
