@@ -6,7 +6,7 @@ BEGIN
         JOIN pg_namespace n
             ON n.oid = t.typnamespace
         WHERE t.typname = 'e_type_terms'
-          AND n.nspname = 'documents'
+          AND n.nspname = 'compliance'
     ) THEN
         CREATE TYPE compliance.e_type_terms AS ENUM (
             'terms_of_use',
