@@ -57,7 +57,10 @@ export function UserPage() {
       <UserPageFilters onCreateClick={handleOpenCreate} />
 
       <div className="w-full mb-6">
-        <UserTable onEditClick={handleOpenEdit} onDeleteClick={handleOpenDelete} />
+        <UserTable
+          onEditClick={handleOpenEdit}
+          onDeleteClick={handleOpenDelete}
+        />
       </div>
 
       <Pagination />
@@ -68,12 +71,11 @@ export function UserPage() {
         user={userToEdit}
       />
 
-      <ConfirmDeleteModal 
+      <ConfirmDeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleConfirmDelete}
       />
-
     </div>
   );
 }

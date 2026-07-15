@@ -18,19 +18,19 @@ export function ConstructionPage({ title }: ConstructionPageProps) {
       <h1 className="text-2xl md:text-3xl font-bold text-azul-marinho mb-2">
         {title ? `Página de ${title}` : "Página em construção"}
       </h1>
-      
+
       <p className="text-cinza-escuro text-[15px] max-w-md mb-8 leading-relaxed">
-        Estamos trabalhando muito para deixar essa tela prontinha e incrível para você!
+        Estamos trabalhando muito para deixar essa tela prontinha e incrível
+        para você!
       </p>
 
-      <Button 
+      <Button
         onClick={() => navigate("/admin")}
         className="h-11 px-6 rounded-xl bg-azul-corporativo hover:bg-azul-marinho text-white text-[15px] font-medium flex items-center gap-2 shadow-sm transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Voltar para a Visão Geral
       </Button>
-
     </div>
   );
 }

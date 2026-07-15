@@ -29,12 +29,12 @@ export function RecentFolders() {
               />
 
               <h3
-                className={`text-sm font-semibold ${folder.active ? "text-azul-interativo" : "text-cinza-escuro"}`}
+                className={`text-sm font-semibold text-center w-full ${folder.active ? "text-azul-interativo" : "text-cinza-escuro"}`}
               >
                 {folder.name}
               </h3>
               <p
-                className={`text-xs mt-1 font-medium ${folder.active ? "text-azul-interativo/80" : "text-cinza-escuro"}`}
+                className={`text-xs mt-1 font-medium text-center w-full ${folder.active ? "text-azul-interativo/80" : "text-cinza-escuro"}`}
               >
                 {folder.docs} Documentos
               </p>

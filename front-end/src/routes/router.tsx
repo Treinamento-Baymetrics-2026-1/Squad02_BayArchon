@@ -42,6 +42,10 @@ export const router = createBrowserRouter([
         element: <UserPage />,
       },
       {
+        path: "documentos",
+        element: <ConstructionPage title="Documentos" />,
+      },
+      {
         path: "clientes",
         element: <ConstructionPage title="Clientes" />,
       },
@@ -54,9 +58,17 @@ export const router = createBrowserRouter([
         element: <ConstructionPage title="Lixeira" />,
       },
       {
-        path: "configuracoes", 
+        path: "configuracoes",
         element: <ConstructionPage title="Configurações" />,
       },
+      {
+        path: "*",
+        element: <ConstructionPage title="Recurso indisponível" />,
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <ConstructionPage title="Página não encontrada" />,
   },
 ]);

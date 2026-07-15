@@ -86,7 +86,7 @@ export function Sidebar() {
           active
         />
         <NavItem
-          to="#"
+          to="/admin/documentos"
           icon={documentosIcon}
           text="Documentos"
           isExpanded={isExpanded}
@@ -116,8 +116,6 @@ export function Sidebar() {
           text="Lixeira"
           isExpanded={isExpanded}
         />
-
-        {/* <div className="flex-1"></div> */}
 
         <NavItem
           to="/admin/configuracoes"

@@ -30,7 +30,6 @@ const registerSchema = z.object({
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export function RegisterUserForm() {
-
   const { mutate: registerUser, isPending } = useRegisterUser();
 
   const form = useForm<RegisterFormValues>({
@@ -45,13 +44,13 @@ export function RegisterUserForm() {
   });
 
   function onSubmit(data: RegisterFormValues) {
-
     const payload = {
       name: data.name,
       email: data.email,
       access_level: data.role,
-      sector_id: data.department === "ti" ? 1 : data.department === "rh" ? 2 : 3,
-    }
+      sector_id:
+        data.department === "ti" ? 1 : data.department === "rh" ? 2 : 3,
+    };
     registerUser(payload);
   }
 

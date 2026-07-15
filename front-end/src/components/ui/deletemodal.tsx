@@ -7,11 +7,11 @@ interface DeleteModalProps {
   message?: string;
 }
 
-export function ConfirmDeleteModal({ 
-  isOpen, 
-  onClose, 
-  onConfirm, 
-  message = "Você tem certeza que quer excluir esse registro?" 
+export function ConfirmDeleteModal({
+  isOpen,
+  onClose,
+  onConfirm,
+  message = "Você tem certeza que deseja tornar esse usuário inativo?",
 }: DeleteModalProps) {
   if (!isOpen) return null;
 
@@ -21,24 +21,23 @@ export function ConfirmDeleteModal({
         <h3 className="text-[18px] font-semibold text-azul-marinho mb-8 leading-snug">
           {message}
         </h3>
-        
+
         <div className="flex items-center justify-center gap-4">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={onClose}
             className="h-10 px-6 rounded-lg border border-azul-corporativo bg-transparent text-azul-corporativo hover:bg-azul-corporativo/5 font-medium"
           >
             Cancelar
           </Button>
-          
-          <Button 
+
+          <Button
             onClick={onConfirm}
             className="h-10 px-6 rounded-lg bg-vermelho hover:bg-red-600 text-white font-medium shadow-none"
           >
-            Excluir
+            Inativar
           </Button>
         </div>
-        
       </div>
     </div>
   );

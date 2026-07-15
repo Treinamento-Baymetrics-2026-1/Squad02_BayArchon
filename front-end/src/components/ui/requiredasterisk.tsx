@@ -12,7 +12,7 @@ export function RequiredAsterisk() {
         <TooltipTrigger asChild>
           <span className="text-vermelho cursor-help ml-1">*</span>
         </TooltipTrigger>
-        <TooltipContent className="bg-preto-suave text-white text-xs border-none">
+        <TooltipContent className="bg-vermelho text-white text-xs border-none">
           <p>Campo obrigatório</p>
         </TooltipContent>
       </Tooltip>

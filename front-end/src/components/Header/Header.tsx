@@ -8,22 +8,22 @@ export function Header() {
 
   return (
     <>
-    <header className="h-16  bg-white flex items-center justify-between px-6">
-      <div className="w-40 hidden md:block" aria-hidden="true"></div>
+      <header className="h-16  bg-white flex items-center justify-between px-6">
+        <div className="w-40 hidden md:block" aria-hidden="true"></div>
 
-      <div className="flex-1 max-w-2xl mx-4 ">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
-          <input
-            type="text"
-            placeholder="Buscar pastas, documentos, usuários ou clientes..."
-            className="w-full pl-10 pr-4 py-2 bg-off-white border border-bordaoff-white rounded-lg focus:outline-none focus:border-azul-interativo"
-          />
+        <div className="flex-1 max-w-2xl mx-4 ">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Buscar pastas, documentos, usuários ou clientes..."
+              className="w-full pl-10 pr-4 py-2 bg-off-white border border-bordaoff-white rounded-lg focus:outline-none focus:border-azul-interativo"
+            />
+          </div>
         </div>
-      </div>
 
- <div className="flex items-center ml-4">
-          <button 
+        <div className="flex items-center ml-4">
+          <button
             onClick={() => setIsProfileModalOpen(true)}
             className="flex items-center gap-3 p-1.5 pr-2 rounded-xl hover:bg-cinza-claro/50 transition-colors text-left"
           >
@@ -42,9 +42,9 @@ export function Header() {
         </div>
       </header>
 
-<UserProfileModal 
-        isOpen={isProfileModalOpen} 
-        onClose={() => setIsProfileModalOpen(false)} 
+      <UserProfileModal
+        isOpen={isProfileModalOpen}
+        onClose={() => setIsProfileModalOpen(false)}
       />
     </>
   );
