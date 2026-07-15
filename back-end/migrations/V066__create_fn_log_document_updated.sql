@@ -25,25 +25,25 @@ BEGIN
           'old_visibility', OLD.visibility,
 
           'new_extension', NEW.extension,
-          'old_extension', NEW.extension,
+          'old_extension', OLD.extension,
 
           'new_source', NEW.source,
-          'old_source', NEW.source,
+          'old_source', OLD.source,
 
           'new_category_id', NEW.category_id,
-          'old_category_id', NEW.category_id,
+          'old_category_id', OLD.category_id,
 
           'new_responsible_id', NEW.responsible_id,
-          'old_responsible_id', NEW.responsible_id,
+          'old_responsible_id', OLD.responsible_id,
 
           'new_sector_id', NEW.sector_id,
-          'old_sector_id', NEW.sector_id,
+          'old_sector_id', OLD.sector_id,
 
           'new_client_id', NEW.client_id,
-          'old_client_id', NEW.client_id,
+          'old_client_id', OLD.client_id,
 
           'new_project_id', NEW.project_id,
-          'old_project_id', NEW.project_id,
+          'old_project_id', OLD.project_id,
 
           'file_id', NEW.file_id,
 
