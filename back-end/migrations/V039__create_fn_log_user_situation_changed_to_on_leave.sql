@@ -18,7 +18,7 @@ BEGIN
             details
         )
         VALUES (
-            NEW.created_by,
+            auth.uid(),
             NEW.id,
             'user_situation_changed_to_on_leave',
             json_build_object(

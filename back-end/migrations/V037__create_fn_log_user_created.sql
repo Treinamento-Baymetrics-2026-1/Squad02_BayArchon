@@ -14,7 +14,7 @@ BEGIN
         type_logs,
         details
     )   VALUES (
-        NEW.created_by,
+        auth.uid(),
         NEW.id,
         'user_created',
         json_build_object(
