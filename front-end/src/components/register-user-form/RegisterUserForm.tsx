@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRegisterUser } from "@/hooks/UseAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -30,9 +29,6 @@ const registerSchema = z.object({
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export function RegisterUserForm() {
-
-  const { mutate: registerUser, isPending } = useRegisterUser();
-
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     mode: "onChange",
@@ -45,14 +41,7 @@ export function RegisterUserForm() {
   });
 
   function onSubmit(data: RegisterFormValues) {
-
-    const payload = {
-      name: data.name,
-      email: data.email,
-      access_level: data.role,
-      sector_id: data.department === "ti" ? 1 : data.department === "rh" ? 2 : 3,
-    }
-    registerUser(payload);
+    console.log("Dados de cadastro prontos para a API:", data);
   }
 
   return (
@@ -191,10 +180,9 @@ export function RegisterUserForm() {
           </Button>
           <Button
             type="submit"
-            disabled={isPending}
             className="h-12 min-w-[120px] rounded-xl bg-azul-corporativo text-[16px] font-medium text-white hover:bg-azul-marinho"
           >
-            {isPending ? "Cadastrando..." : "Cadastrar"}
+            Cadastrar
           </Button>
         </div>
       </form>
