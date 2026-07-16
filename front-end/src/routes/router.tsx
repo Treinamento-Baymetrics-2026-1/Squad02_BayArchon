@@ -8,6 +8,9 @@ import { AdminPage } from "@/pages/AdminPage";
 import { AiChatPage } from "@/pages/AiChatPage";
 import { UserPage } from "@/pages/UserPage";
 import { ConstructionPage } from "@/pages/ConstructionPage";
+import { ForgotPasswordPage } from "@/pages/ForgotPasswordPage";
+import { RecoverySentPage } from "@/pages/RecoverySentPage";
+import { ResetPasswordPage } from "@/pages/ResetPasswordPage";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +27,18 @@ export const router = createBrowserRouter([
     path: "/cadastro-cliente",
     element: <RegisterClient />,
   },
+
+  {
+     path: "/redefinir-senha",
+    element: <ResetPasswordPage /> 
+  },
+
+  { 
+    path: "/verifique-seu-email",
+    element: <RecoverySentPage /> 
+  },
+
+  { path: "/esqueci-senha", element: <ForgotPasswordPage /> },
 
   {
     path: "/admin",

@@ -80,7 +80,7 @@ export function UserModal({ isOpen, onClose, user }: UserModalProps) {
         },
       });
     } else {
-     onClose();
+      onClose();
     }
   };
 

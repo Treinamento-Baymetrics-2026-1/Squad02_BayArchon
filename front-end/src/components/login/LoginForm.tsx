@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckCircle2 } from "lucide-react";
 import { RequiredAsterisk } from "@/components/ui/requiredasterisk";
+import { supabase } from "@/lib/supabase";
 import {
   Form,
   FormControl,
@@ -28,6 +29,7 @@ export function LoginForm() {
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -38,14 +40,30 @@ export function LoginForm() {
     },
   });
 
-  function onSubmit() {
+  async function onSubmit(data: LoginFormValues) {
     setIsLoading(true);
-    setTimeout(() => {
+    setApiError(null);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (error) {
+      if (error.message === "Invalid login credentials") {
+        setApiError("E-mail ou senha incorretos.");
+      } else {
+        setApiError("Ocorreu um erro ao fazer login.");
+      }
       setIsLoading(false);
-      setIsSuccess(true);
-      setTimeout(() => {
-        navigate("/admin");
-      }, 2000);
+      return;
+    }
+
+    setIsLoading(false);
+    setIsSuccess(true);
+
+    setTimeout(() => {
+      navigate("/admin");
     }, 800);
   }
 
@@ -68,80 +86,88 @@ export function LoginForm() {
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6"
-        noValidate
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field, fieldState }) => (
-            <FormItem className="space-y-[2px]">
-              <FormLabel className="text-[16px] font-medium text-preto-claro flex items-center">
-                Email <RequiredAsterisk />
-              </FormLabel>
-              <FormControl>
-                <Input
-                  disabled={isLoading}
-                  type="email"
-                  placeholder="m@example.com"
-                  className={`h-12 rounded-xl border-2 bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 transition-colors ${
-                    fieldState.error
-                      ? "border-vermelho focus-visible:border-vermelho"
-                      : "border-bordaoff-white focus-visible:border-azul-interativo"
-                  }`}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-sm text-vermelho" />
-            </FormItem>
-          )}
-        />
+    <div className="w-full">
+      {apiError && (
+        <div className="w-full mb-6 p-3 bg-red-100 text-vermelho text-sm rounded-xl text-center font-medium border border-vermelho/20 animate-in fade-in">
+          {apiError}
+        </div>
+      )}
 
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field, fieldState }) => (
-            <FormItem className="space-y-[2px]">
-              <div className="flex items-center justify-between">
-                <FormLabel className="text-[16px] font-medium text-preto-claro flex items-center">
-                  Senha <RequiredAsterisk />
-                </FormLabel>
-                <a
-                  href="#"
-                  className="text-[14px] text-azul-interativo hover:underline font-medium"
-                >
-                  Esqueceu a senha?
-                </a>
-              </div>
-              <FormControl>
-                <Input
-                  disabled={isLoading}
-                  type="password"
-                  placeholder="Digite sua senha"
-                  className={`h-12 rounded-xl border-2 bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 transition-colors ${
-                    fieldState.error
-                      ? "border-vermelho focus-visible:border-vermelho"
-                      : "border-bordaoff-white focus-visible:border-azul-interativo"
-                  }`}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="text-sm text-vermelho" />
-            </FormItem>
-          )}
-        />
-
-        <Button
-          disabled={isLoading}
-          type="submit"
-          className="mt-6 h-12 w-full rounded-xl bg-azul-corporativo text-white text-[16px] font-medium hover:bg-azul-marinho transition-all shadow-sm disabled:opacity-75"
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6"
+          noValidate
         >
-          {isLoading ? "Validando..." : "Entrar"}
-        </Button>
-      </form>
-    </Form>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field, fieldState }) => (
+              <FormItem className="space-y-[2px]">
+                <FormLabel className="text-[16px] font-medium text-preto-claro flex items-center">
+                  Email <RequiredAsterisk />
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    disabled={isLoading}
+                    type="email"
+                    placeholder="m@example.com"
+                    className={`h-12 rounded-xl border-2 bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 transition-colors ${
+                      fieldState.error
+                        ? "border-vermelho focus-visible:border-vermelho"
+                        : "border-bordaoff-white focus-visible:border-azul-interativo"
+                    }`}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-sm text-vermelho" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field, fieldState }) => (
+              <FormItem className="space-y-[2px]">
+                <div className="flex items-center justify-between">
+                  <FormLabel className="text-[16px] font-medium text-preto-claro flex items-center">
+                    Senha <RequiredAsterisk />
+                  </FormLabel>
+                  <Link
+                    to="/esqueci-senha"
+                    className="text-[14px] text-azul-interativo hover:underline font-medium"
+                  >
+                    Esqueceu a senha?
+                  </Link>
+                </div>
+                <FormControl>
+                  <Input
+                    disabled={isLoading}
+                    type="password"
+                    placeholder="Digite sua senha"
+                    className={`h-12 rounded-xl border-2 bg-white px-4 text-[16px] shadow-sm placeholder:text-cinza-escuro focus-visible:ring-0 transition-colors ${
+                      fieldState.error
+                        ? "border-vermelho focus-visible:border-vermelho"
+                        : "border-bordaoff-white focus-visible:border-azul-interativo"
+                    }`}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-sm text-vermelho" />
+              </FormItem>
+            )}
+          />
+
+          <Button
+            disabled={isLoading}
+            type="submit"
+            className="mt-6 h-12 w-full rounded-xl bg-azul-corporativo text-white text-[16px] font-medium hover:bg-azul-marinho transition-all shadow-sm disabled:opacity-75"
+          >
+            {isLoading ? "Validando..." : "Entrar"}
+          </Button>
+        </form>
+      </Form>
+    </div>
   );
 }
