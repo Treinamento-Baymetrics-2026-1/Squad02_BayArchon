@@ -21,7 +21,7 @@ BEGIN
             details
         )
         VALUES (
-            NEW.created_by,
+            auth.uid(),
             NEW.id,
             'user_soft_deleted',
             json_build_object(

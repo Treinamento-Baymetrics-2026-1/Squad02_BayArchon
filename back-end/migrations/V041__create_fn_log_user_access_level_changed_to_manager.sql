@@ -18,7 +18,7 @@ BEGIN
             details
         )
         VALUES (
-            NEW.created_by,
+            auth.uid(),
             NEW.id,
             'user_access_level_changed_to_manager',
             json_build_object(

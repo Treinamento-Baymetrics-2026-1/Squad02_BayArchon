@@ -17,7 +17,7 @@ BEGIN
             details
         )
         VALUES (
-            NEW.created_by,
+            auth.uid(),
             NEW.id,
             'user_name_changed',
             json_build_object(
