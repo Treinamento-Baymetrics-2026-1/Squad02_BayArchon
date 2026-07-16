@@ -80,7 +80,7 @@ export function UserModal({ isOpen, onClose, user }: UserModalProps) {
         },
       });
     } else {
-      console.log("Editando usuário:", payloadParaAPI);
+     onClose();
     }
   };
 

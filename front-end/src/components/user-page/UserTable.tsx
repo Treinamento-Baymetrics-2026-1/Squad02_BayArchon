@@ -15,7 +15,7 @@ const mockUsers: User[] = [
   {
     name: "Beatriz Menezes",
     cpf: "529.982.247-25",
-    email: "beatriz.menezes@baymetric...",
+    email: "beatriz.menezes@baymetrics.com",
     sector: "Financeiro",
     role: "Administrador",
     status: "Ativo",
@@ -23,7 +23,7 @@ const mockUsers: User[] = [
   {
     name: "Carlos Henrique Lima",
     cpf: "111.444.777-35",
-    email: "carlos.lima@baymetrics.com...",
+    email: "carlos.lima@baymetrics.com",
     sector: "RH",
     role: "Gestor",
     status: "Ativo",
@@ -31,7 +31,7 @@ const mockUsers: User[] = [
   {
     name: "Fernanda Oliveira",
     cpf: "935.411.347-80",
-    email: "fernanda.oliveira@baymetric...",
+    email: "fernanda.oliveira@baymetrics.com",
     sector: "Jurídico",
     role: "Colaborador",
     status: "Inativo",
@@ -39,7 +39,7 @@ const mockUsers: User[] = [
   {
     name: "João Pedro Martins",
     cpf: "286.255.878-87",
-    email: "joao.martins@baymetrics.co...",
+    email: "joao.martins@baymetrics.com",
     sector: "Financeiro",
     role: "Colaborador",
     status: "Ativo",
@@ -47,7 +47,7 @@ const mockUsers: User[] = [
   {
     name: "Mariana Costa",
     cpf: "357.192.230-04",
-    email: "mariana.costa@baymetrics....",
+    email: "mariana.costa@baymetrics.com",
     sector: "Operacional",
     role: "Gestor",
     status: "Inativo",
@@ -55,7 +55,7 @@ const mockUsers: User[] = [
   {
     name: "Rafael Almeida",
     cpf: "357.192.230-04",
-    email: "rafael.almeida@baymetrics....",
+    email: "rafael.almeida@baymetrics.com",
     sector: "Jurídico",
     role: "Administrador",
     status: "Inativo",
@@ -63,7 +63,7 @@ const mockUsers: User[] = [
   {
     name: "Viviam Medeiros",
     cpf: "714.602.380-01",
-    email: "viviam.medeiros@baymetric...",
+    email: "viviam.medeiros@baymetrics.com",
     sector: "Financeiro",
     role: "Colaborador",
     status: "Ativo",
@@ -71,7 +71,7 @@ const mockUsers: User[] = [
   {
     name: "Paulo Santos da Silva",
     cpf: "714.602.380-01",
-    email: "paulo.silva@baymetrics.com...",
+    email: "paulo.silva@baymetrics.com",
     sector: "Financeiro",
     role: "Gestor",
     status: "Inativo",
