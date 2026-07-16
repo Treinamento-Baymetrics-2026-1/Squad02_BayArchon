@@ -1,4 +1,5 @@
-import { z } from "zod";
+import { uuid, z } from "zod";
+import { AnalysisType } from "../_shared/prompts.ts";
 
 export const DocumentUploadSchema = z.object({
     file  : z.array(z.instanceof(File)),
@@ -13,4 +14,10 @@ export const DocumentUploadSchema = z.object({
     client_id : z.uuid(),
     project_id : z.number(),
     object_id : z.uuid(),
+})
+
+export const DocumentAnalyzeSchema = z.object({
+    filePath : z.string(),
+    systemPrompt : z.nativeEnum(AnalysisType),
+    userPrompt : z.string().optional(),
 })

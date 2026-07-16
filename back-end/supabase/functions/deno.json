@@ -4,6 +4,10 @@
     "@supabase/server": "npm:@supabase/server@^1",
     "@supabase": "npm:@supabase/supabase-js@2",
     "zod": "npm:zod@^4.4.3",
-    "hono": "npm:hono"
+    "hono": "npm:hono",
+    "@mammoth" : "npm:mammoth",
+    "@pdf-lib" : "npm:pdf-lib",
+    "@pdfkMake" : "npm:pdfMake",
+    "@resolvePdf" : "https://esm.sh/pdfjs-serverless@0.4.2"
   }
 }

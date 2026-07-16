@@ -1,12 +1,17 @@
 import { Hono } from "hono";
-import {UploadFile} from "./DocumentsController.ts";
-
-const authRoutes = new Hono();
+import {UploadFile, GetFile, AnalyzeDocument} from "./DocumentsController.ts";
 
 
-authRoutes.post("/upload-file", UploadFile)
+const documentsRoutes = new Hono();
+
+
+documentsRoutes.post("/upload-file", UploadFile)
+
+documentsRoutes.post("/catch-file", GetFile)
+
+documentsRoutes.post("/analyse", AnalyzeDocument)
 
 
 
 
-export default authRoutes;
+export default documentsRoutes;

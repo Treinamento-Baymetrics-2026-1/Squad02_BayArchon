@@ -1,16 +1,15 @@
 import { SupabaseClient } from "@supabase";
-import { DocumentUploadSchema } from "../DocumentsSchema.ts";
-import {z} from "zod";
-import { error } from "node:console";
 
-export async function uploadFile(supabase : SupabaseClient, uploadData : z.infer<typeof DocumentUploadSchema>){
 
-    const files = uploadData.file
+export async function uploadFile(supabase : SupabaseClient, filePath : string, file : File){
 
-     if(!files.length){
-        throw new Error("Erro ao enviar arquivo");
-    }
+    const arrayBuffer = await file.arrayBuffer()
 
+    const { error } = await supabase.storage.from("documents").upload(filePath, arrayBuffer, {
+        contentType: file.type
+    })
     
+    if(error)
+        throw new Error(error.message)
     
 }
