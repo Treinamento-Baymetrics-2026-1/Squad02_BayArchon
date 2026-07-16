@@ -15,10 +15,6 @@ import { Link } from "react-router-dom";
 export function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   return (
     <aside
       className={`h-screen bg-azul-marinho text-white flex flex-col py-6 transition-all duration-400 ease-in-out rounded-r-2xl overflow-hidden ${
@@ -28,19 +24,13 @@ export function Sidebar() {
       <div
         className={`flex items-center justify-center mb-10 transition-all duration-400 ${isExpanded ? "h-14 px-2" : "h-10"}`}
       >
-        <button
-          onClick={toggleSidebar}
-          className="focus:outline-none"
-          title={isExpanded ? "Reduzir menu" : "Expandir menu"}
-        >
-          <img
-            src={isExpanded ? logoSidebar : bayarconIcon}
-            alt="BayArchon Logo"
-            className={`object-contain transition-all duration-400 ease-in-out ${
-              isExpanded ? "h-12 w-auto opacity-100" : "w-8 h-8 opacity-90"
-            }`}
-          />
-        </button>
+        <img
+          src={isExpanded ? logoSidebar : bayarconIcon}
+          alt="BayArchon Logo"
+          className={`object-contain transition-all duration-400 ease-in-out ${
+            isExpanded ? "h-12 w-auto opacity-100" : "w-8 h-8 opacity-90"
+          }`}
+        />
       </div>
 
       <nav className="flex-1 flex flex-col space-y-2">
@@ -92,26 +82,25 @@ export function Sidebar() {
           isExpanded={isExpanded}
         />
         <NavItem
-          to="/admin/clientes"
+          to="#"
           icon={clienteIcon}
-          text="Clientes"
+          text="Clientes..."
           isExpanded={isExpanded}
         />
         <NavItem
-          to="/admin/usuarios"
+          to="#"
           icon={usuariosIcon}
           text="Usuários"
           isExpanded={isExpanded}
         />
         <NavItem
-          to="/admin/setores"
-
+          to="#"
           icon={setoresIcon}
           text="Setores"
           isExpanded={isExpanded}
         />
         <NavItem
-          to="/admin/lixeira"
+          to="#"
           icon={lixeiraIcon}
           text="Lixeira"
           isExpanded={isExpanded}
@@ -120,7 +109,7 @@ export function Sidebar() {
         {/* <div className="flex-1"></div> */}
 
         <NavItem
-          to="/admin/configuracoes"
+          to="#"
           icon={configuracaoIcon}
           text="Configuração"
           isExpanded={isExpanded}
