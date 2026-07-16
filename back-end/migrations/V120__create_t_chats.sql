@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS ia.t_chats (
     id                  UUID            NOT NULL    DEFAULT gen_random_uuid(),
     display_title       VARCHAR(200)    NOT NULL,
     created_at          TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
-    is_deleted          BOOLEAN         NOT NULL    DEFAULT FALSE,
     deleted_at          TIMESTAMPTZ         NULL    DEFAULT NULL,
+    is_deleted          BOOLEAN         NOT NULL    DEFAULT FALSE,
     user_id             UUID            NOT NULL,
 
     -- Primary Key
