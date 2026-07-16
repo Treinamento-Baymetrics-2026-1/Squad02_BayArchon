@@ -10,6 +10,7 @@ import lixeiraIcon from "../assets/icons/lixeira.svg";
 import configuracaoIcon from "../assets/icons/configurações.svg";
 import reduzirIcon from "../assets/icons/reduzir.svg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -62,44 +63,44 @@ export function Sidebar() {
         </div>
 
         <NavItem
-          href="#"
+          to="/admin/chat"
           icon={chatAiIcon}
           text="Chat com IA"
           isExpanded={isExpanded}
         />
         <NavItem
-          href="#"
+          to="/admin"
           icon={visaoGeralIcon}
           text="Visão geral"
           isExpanded={isExpanded}
           active
         />
         <NavItem
-          href="#"
+          to="#"
           icon={documentosIcon}
           text="Documentos"
           isExpanded={isExpanded}
         />
         <NavItem
-          href="#"
+          to="#"
           icon={clienteIcon}
           text="Clientes..."
           isExpanded={isExpanded}
         />
         <NavItem
-          href="#"
+          to="#"
           icon={usuariosIcon}
           text="Usuários"
           isExpanded={isExpanded}
         />
         <NavItem
-          href="#"
+          to="#"
           icon={setoresIcon}
           text="Setores"
           isExpanded={isExpanded}
         />
         <NavItem
-          href="#"
+          to="#"
           icon={lixeiraIcon}
           text="Lixeira"
           isExpanded={isExpanded}
@@ -108,7 +109,7 @@ export function Sidebar() {
         {/* <div className="flex-1"></div> */}
 
         <NavItem
-          href="#"
+          to="#"
           icon={configuracaoIcon}
           text="Configuração"
           isExpanded={isExpanded}
@@ -119,23 +120,17 @@ export function Sidebar() {
 }
 
 interface NavItemProps {
-  href: string;
+  to: string;
   icon: string;
   text: string;
   isExpanded: boolean;
   active?: boolean;
 }
 
-function NavItem({
-  href,
-  icon,
-  text,
-  isExpanded,
-  active = false,
-}: NavItemProps) {
+function NavItem({ to, icon, text, isExpanded, active = false }: NavItemProps) {
   return (
-    <a
-      href={href}
+    <Link
+      to={to}
       className={`group relative flex items-center rounded-lg transition-all duration-300 ease-in-out overflow-hidden ${
         isExpanded ? "px-3 py-2 gap-3" : "justify-center py-3"
       } ${active ? "bg-white/10" : "hover:bg-white/10"}`}
@@ -160,6 +155,6 @@ function NavItem({
       {active && isExpanded && (
         <div className="absolute right-2 w-1.5 h-1.5 rounded-full bg-azul-interativo shadow-[0_0_8px_rgba(79,125,255,0.8)]"></div>
       )}
-    </a>
+    </Link>
   );
 }

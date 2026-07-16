@@ -24,7 +24,7 @@ type RegisterClientFormValues = z.infer<typeof registerClientSchema>;
 export function RegisterClientForm() {
   const form = useForm<RegisterClientFormValues>({
     resolver: zodResolver(registerClientSchema),
-    mode: "onChange", 
+    mode: "onChange",
     defaultValues: {
       name: "",
       cnpj: "",
@@ -38,8 +38,11 @@ export function RegisterClientForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" noValidate>
-        
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6"
+        noValidate
+      >
         <FormField
           control={form.control}
           name="name"
@@ -85,7 +88,7 @@ export function RegisterClientForm() {
                   {...field}
                   onChange={(e) => {
                     const maskedValue = formatCNPJ(e.target.value);
-                    field.onChange(maskedValue); 
+                    field.onChange(maskedValue);
                   }}
                 />
               </FormControl>
@@ -133,7 +136,6 @@ export function RegisterClientForm() {
             Cadastrar
           </Button>
         </div>
-
       </form>
     </Form>
   );
