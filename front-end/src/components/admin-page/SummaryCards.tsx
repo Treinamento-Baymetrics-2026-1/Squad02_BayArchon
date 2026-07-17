@@ -41,13 +41,16 @@ export function SummaryCards() {
             key={card.title}
             className="bg-off-white p-4 rounded-xl border border-bordaoff-white shadow-sm flex items-center gap-4 h-24"
           >
-            <Icon className={`w-8 h-8 ${card.color}`} strokeWidth={1.2} />
+            <Icon
+              className={`w-8 h-8 shrink-0 ${card.color}`}
+              strokeWidth={1.2}
+            />
 
-            <div className="flex flex-col">
-              <h3 className={`text-xl font-semibold ${card.color}`}>
+            <div className="flex flex-col flex-1 min-w-0">
+              <h3 className={`text-xl font-semibold truncate ${card.color}`}>
                 {card.title}
               </h3>
-              <p className="text-xl text-cinza-escuro">{card.value}</p>
+              <p className="text-xl text-cinza-escuro truncate">{card.value}</p>
             </div>
           </div>
         );
