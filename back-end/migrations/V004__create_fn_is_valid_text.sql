@@ -3,15 +3,13 @@ RETURNS BOOLEAN
 LANGUAGE plpgsql
 IMMUTABLE
 AS $$
-DECLARE
-    v_clean TEXT;
 BEGIN
-    IF p_text IS NULL THEN
-        RETURN FALSE;
-    END IF;
-
-    v_clean := btrim(regexp_replace(p_text, '\s+', ' ', 'g'));
-
-    RETURN length(v_clean) >= 3;
+    RETURN (
+        p_text IS NOT NULL
+        AND char_length(p_text) >= 3
+        AND p_text !~ '^\s'
+        AND p_text !~ '\s$'
+        AND p_text !~ '\s{2,}'
+    );
 END;
 $$;
