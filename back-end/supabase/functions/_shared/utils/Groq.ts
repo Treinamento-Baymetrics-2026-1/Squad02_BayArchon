@@ -1,4 +1,3 @@
-import { text } from "node:stream/consumers";
 import {AnalysisType, customPromptRules, reportPromptRules} from "../prompts.ts"
 
 export async function GroqRequest(
