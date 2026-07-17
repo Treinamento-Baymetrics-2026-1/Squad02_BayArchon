@@ -10,10 +10,15 @@ import lixeiraIcon from "../assets/icons/lixeira.svg";
 import configuracaoIcon from "../assets/icons/configurações.svg";
 import reduzirIcon from "../assets/icons/reduzir.svg";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
+  const location = useLocation();
+
+  const toggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <aside
@@ -24,13 +29,19 @@ export function Sidebar() {
       <div
         className={`flex items-center justify-center mb-10 transition-all duration-400 ${isExpanded ? "h-14 px-2" : "h-10"}`}
       >
-        <img
-          src={isExpanded ? logoSidebar : bayarconIcon}
-          alt="BayArchon Logo"
-          className={`object-contain transition-all duration-400 ease-in-out ${
-            isExpanded ? "h-12 w-auto opacity-100" : "w-8 h-8 opacity-90"
-          }`}
-        />
+        <button
+          onClick={toggleSidebar}
+          className="focus:outline-none"
+          title={isExpanded ? "Reduzir menu" : "Expandir menu"}
+        >
+          <img
+            src={isExpanded ? logoSidebar : bayarconIcon}
+            alt="BayArchon Logo"
+            className={`object-contain transition-all duration-400 ease-in-out ${
+              isExpanded ? "h-12 w-auto opacity-100" : "w-8 h-8 opacity-90"
+            }`}
+          />
+        </button>
       </div>
 
       <nav className="flex-1 flex flex-col space-y-2">
@@ -67,52 +78,56 @@ export function Sidebar() {
           icon={chatAiIcon}
           text="Chat com IA"
           isExpanded={isExpanded}
+          active={location.pathname === "/admin/chat"}
         />
         <NavItem
           to="/admin"
           icon={visaoGeralIcon}
           text="Visão geral"
           isExpanded={isExpanded}
-          active
+          active={location.pathname === "/admin"}
         />
         <NavItem
-          to="#"
+          to="/admin/documentos"
           icon={documentosIcon}
           text="Documentos"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/documentos")} // startsWith mantém ativo se houver sub-rotas
         />
         <NavItem
-          to="#"
+          to="/admin/clientes"
           icon={clienteIcon}
-          text="Clientes..."
+          text="Clientes"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/clientes")}
         />
         <NavItem
-          to="#"
+          to="/admin/usuarios"
           icon={usuariosIcon}
           text="Usuários"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/usuarios")}
         />
         <NavItem
-          to="#"
+          to="/admin/setores"
           icon={setoresIcon}
           text="Setores"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/setores")}
         />
         <NavItem
-          to="#"
+          to="/admin/lixeira"
           icon={lixeiraIcon}
           text="Lixeira"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/lixeira")}
         />
-
-        {/* <div className="flex-1"></div> */}
-
         <NavItem
-          to="#"
+          to="/admin/configuracoes"
           icon={configuracaoIcon}
           text="Configuração"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/configuracoes")}
         />
       </nav>
     </aside>

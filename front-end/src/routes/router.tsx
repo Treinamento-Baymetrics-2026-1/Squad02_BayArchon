@@ -6,6 +6,11 @@ import { RegisterClient } from "@/pages/registerClientForm";
 import { AdminLayout } from "@/layouts/AdminLayout";
 import { AdminPage } from "@/pages/AdminPage";
 import { AiChatPage } from "@/pages/AiChatPage";
+import { UserPage } from "@/pages/UserPage";
+import { ConstructionPage } from "@/pages/ConstructionPage";
+import { ForgotPasswordPage } from "@/pages/ForgotPasswordPage";
+import { RecoverySentPage } from "@/pages/RecoverySentPage";
+import { ResetPasswordPage } from "@/pages/ResetPasswordPage";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +29,18 @@ export const router = createBrowserRouter([
   },
 
   {
+     path: "/redefinir-senha",
+    element: <ResetPasswordPage /> 
+  },
+
+  { 
+    path: "/verifique-seu-email",
+    element: <RecoverySentPage /> 
+  },
+
+  { path: "/esqueci-senha", element: <ForgotPasswordPage /> },
+
+  {
     path: "/admin",
     element: <AdminLayout />,
     children: [
@@ -35,6 +52,38 @@ export const router = createBrowserRouter([
         path: "chat",
         element: <AiChatPage />,
       },
+      {
+        path: "usuarios",
+        element: <UserPage />,
+      },
+      {
+        path: "documentos",
+        element: <ConstructionPage title="Documentos" />,
+      },
+      {
+        path: "clientes",
+        element: <ConstructionPage title="Clientes" />,
+      },
+      {
+        path: "setores",
+        element: <ConstructionPage title="Setores" />,
+      },
+      {
+        path: "lixeira",
+        element: <ConstructionPage title="Lixeira" />,
+      },
+      {
+        path: "configuracoes",
+        element: <ConstructionPage title="Configurações" />,
+      },
+      {
+        path: "*",
+        element: <ConstructionPage title="Recurso indisponível" />,
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <ConstructionPage title="Página não encontrada" />,
   },
 ]);

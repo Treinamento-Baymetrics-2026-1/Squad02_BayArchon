@@ -10,13 +10,13 @@
     "type-check": "tsc -b",
     "test:ci": "echo 'Nenhum teste configurado ainda' && exit 0",
     "preview": "vite preview",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"", 
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.9",
     "@hookform/resolvers": "^5.4.0",
-    "@supabase/supabase-js": "^2.108.2",
+    "@supabase/supabase-js": "^2.110.7",
     "@tanstack/react-query": "^5.101.0",
     "axios": "^1.18.0",
     "class-variance-authority": "^0.7.1",
