@@ -1,6 +1,6 @@
 import { ReportSchema } from "../../Documents/DocumentsSchema.ts";
 import { z } from "zod";
-import { PDFDocument, StandardFonts } from "@pdf-lib";
+import { PDFDocument, PDFPage, PDFFont, StandardFonts, } from "@pdf-lib";
 
 export async function generatePdf(
   report: z.infer<typeof ReportSchema>
@@ -201,12 +201,12 @@ export async function generatePdf(
 // ======================================================
 
 function drawWrappedText(
-  page: any,
+  page: PDFPage,
   text: string,
   x: number,
   y: number,
   maxWidth: number,
-  font: any,
+  font: PDFFont,
   fontSize: number
 ) {
   const lines = wrapText(
@@ -235,12 +235,12 @@ function drawWrappedText(
 // ======================================================
 
 function drawBulletList(
-  page: any,
+  page: PDFPage,
   items: string[],
   x: number,
   y: number,
   maxWidth: number,
-  font: any,
+  font: PDFFont,
   fontSize: number
 ) {
   for (const item of items) {
@@ -285,7 +285,7 @@ function drawBulletList(
 
 function wrapText(
   text: string,
-  font: any,
+  font: PDFFont,
   fontSize: number,
   maxWidth: number
 ) {

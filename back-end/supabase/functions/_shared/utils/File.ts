@@ -21,7 +21,10 @@ export async function  pdfToTextParser(file: Blob){
 
         const content = await page.getTextContent();
 
-        const text = (content.items as any[]).map((item) => item.str).join(" ");
+        const text = content.items
+        .filter((item) => "str" in item)
+        .map((item) => item.str)
+        .join(" ");
 
         fullText += `\n--- PAGE ${i} ---\n` + text;
     }
