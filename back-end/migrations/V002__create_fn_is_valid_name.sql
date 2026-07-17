@@ -4,10 +4,13 @@ LANGUAGE plpgsql
 IMMUTABLE
 AS $$
 BEGIN
-    RETURN(
-        trim(p_name) ~ '^[A-Za-zÀ-ÿ]+( [A-Za-zÀ-ÿ]+)*$'
-        AND length(trim(p_name)) >= 3
+    RETURN (
+        p_name IS NOT NULL
+        AND length(p_name) >= 3
+        AND p_name !~ '^ '
+        AND p_name !~ ' $'
         AND p_name !~ '  '
+        AND p_name ~ '^[A-Za-zÀ-ÿ]+( [A-Za-zÀ-ÿ]+)*$'
     );
 END;
 $$;
