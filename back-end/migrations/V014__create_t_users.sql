@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS registry.t_users(
         ),
 
     --FOREIGN KEY
-    CONSTRAINT fk_users_id
+    CONSTRAINT fk_users
         FOREIGN KEY(id)
         REFERENCES auth.users(id),
 

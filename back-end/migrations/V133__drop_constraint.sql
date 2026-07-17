@@ -1,0 +1,2 @@
+ALTER TABLE registry.t_companies_clients
+DROP CONSTRAINT IF EXISTS chk_companies_clients_email;

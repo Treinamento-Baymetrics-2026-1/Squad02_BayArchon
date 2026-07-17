@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS ia.t_messages (
     is_sent_by_user  BOOLEAN        NOT NULL,
     created_at       TIMESTAMPTZ    NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at       TIMESTAMPTZ    NOT NULL    DEFAULT CURRENT_TIMESTAMP,
-    is_deleted       BOOLEAN        NOT NULL    DEFAULT FALSE,
     deleted_at       TIMESTAMPTZ        NULL    DEFAULT NULL,
+    is_deleted       BOOLEAN        NOT NULL    DEFAULT FALSE,  
     chat_id          UUID           NOT NULL,
 
     -- Primary Key

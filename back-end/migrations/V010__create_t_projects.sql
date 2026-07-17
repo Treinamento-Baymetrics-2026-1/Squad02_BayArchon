@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS registry.t_projects(
     details             VARCHAR(3000)   NOT NULL,
     created_at          TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
     updated_at          TIMESTAMPTZ     NOT NULL    DEFAULT CURRENT_TIMESTAMP,
-    client_id           UUID            NOT NULL,
+    client_id           UUID                NULL,
     sector_id           INTEGER         NOT NULL,
     category_id         INTEGER         NOT NULL,
 
