@@ -1,23 +1,18 @@
-import { uuid, z } from "zod";
+import { z } from "zod";
 import { AnalysisType } from "../_shared/prompts.ts";
 
-export const DocumentUploadSchema = z.object({
-    file  : z.array(z.instanceof(File)),
-    title : z.string(),
-    visibility : z.enum(["private", "public"],{error: "Preencher com Private ou Public"}),
-    extension : z.enum(["pdf", "docx", "txt", "xml"], {error: "Preencher com os tipos autorizados (PDF, DOCX, TXT, XML)"}),
-    source : z.string(),
-    created_by : z.uuid(),
-    category_id : z.number(),
-    responsible_id : z.number(),
-    sector_id : z.number(),
-    client_id : z.uuid(),
-    project_id : z.number(),
-    object_id : z.uuid(),
-})
 
 export const DocumentAnalyzeSchema = z.object({
     filePath : z.string(),
     systemPrompt : z.nativeEnum(AnalysisType),
     userPrompt : z.string().optional(),
+})
+
+export const ReportSchema = z.object({
+  titulo: z.string(),
+  resumo: z.string(),
+  principais_pontos: z.array(z.string()),
+  riscos: z.array(z.string()),
+  oportunidades: z.array(z.string()),
+  conclusao: z.string()
 })

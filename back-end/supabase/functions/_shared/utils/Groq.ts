@@ -1,9 +1,10 @@
 import { text } from "node:stream/consumers";
-import {AnalysisType, customPromptRules, JSONPrompt, loteReportPromptRules, reportPromptRules} from "../prompts.ts"
+import {AnalysisType, customPromptRules, reportPromptRules} from "../prompts.ts"
 
 export async function GroqRequest(
   SystemPrompt: string,
   textDocument: string,
+  GenerateReport : Boolean,
   UserPrompt? : string,
 ) {
 
@@ -33,7 +34,17 @@ export async function GroqRequest(
 
   const data = await response.json();
 
-  return data.choices[0].message.content;
+  const result = data.choices[0].message.content;
+
+  if(GenerateReport){
+    try {
+    return JSON.parse(result)
+    } catch (_error) {
+      throw new Error("Erro de processamento da IA. Solicite o relatório novamente.");
+    }
+  }
+
+  return result;
 }
 
 
@@ -45,8 +56,5 @@ export function getSystemPrompt (type : AnalysisType): string{
      
     case AnalysisType.CUSTOM:
       return customPromptRules;
-
-    case AnalysisType.LOTE_REPORT:
-      return loteReportPromptRules;
   }
 }

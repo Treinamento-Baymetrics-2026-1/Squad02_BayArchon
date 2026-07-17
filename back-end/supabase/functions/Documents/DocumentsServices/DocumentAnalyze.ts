@@ -5,6 +5,8 @@ import { AnalysisType } from "../../_shared/prompts.ts";
 
 export async function DocumentAnalyze(file : Blob, systemPrompt : AnalysisType, userPrompt? : string){
     
+    const generateReport = (systemPrompt == AnalysisType.REPORT ? true : false)
+
     if(!(systemPrompt == AnalysisType.CUSTOM))
       userPrompt = ""
 
@@ -28,9 +30,9 @@ export async function DocumentAnalyze(file : Blob, systemPrompt : AnalysisType, 
 
     const selectedSystemPrompt = getSystemPrompt(systemPrompt);
 
-    console.log(file.type)
 
-    const result = await GroqRequest(selectedSystemPrompt, documentText, userPrompt)
+
+    const result = await GroqRequest(selectedSystemPrompt, documentText, generateReport, userPrompt)
     
     return result;
 

@@ -3,21 +3,15 @@ import { supabase } from "../_shared/supabase.ts";
 import {uploadFile} from "./DocumentsServices/UploadFileService.ts";
 import {fileCatcher} from "./DocumentsServices/CatchFileService.ts";
 import { DocumentAnalyze } from "./DocumentsServices/DocumentAnalyze.ts";
-import {DocumentAnalyzeSchema} from "./DocumentsSchema.ts"
+import {DocumentAnalyzeSchema, ReportSchema} from "./DocumentsSchema.ts"
+import { AnalysisType } from "../_shared/prompts.ts";
+import { generatePdf } from "../_shared/utils/Pdf.ts";
 
 
 
 export async function UploadFile(context : Context){
     const body = await context.req.formData();
     
-    // const parsedUpload = DocumentUploadSchema.safeParse(body);
-    
-    // if(!parsedUpload.success){
-    //   return new Response(
-    //       JSON.stringify({ error: parsedUpload.error }),
-    //       { status: 400 }
-    //   );
-    // }
 
     const files = body.getAll("file")
 
@@ -85,9 +79,33 @@ export async function AnalyzeDocument(context : Context){
       }
 
   try {
+
     const file = await fileCatcher(supabase, parsedDocument.data.filePath);
 
+
     const result = await DocumentAnalyze(file, parsedDocument.data.systemPrompt, parsedDocument.data.userPrompt);
+
+    if(parsedDocument.data.systemPrompt == AnalysisType.REPORT){
+      const report = ReportSchema.parse(result)
+
+      const pdfBytes = await generatePdf(report);
+
+      return new Response(
+      new Uint8Array(pdfBytes),
+      {
+        headers: {
+          "Content-Type":
+            "application/pdf",
+
+          "Content-Disposition":
+            'attachment; filename="relatorio.pdf"'
+        }
+      }
+    );
+
+  }
+
+
     return context.newResponse(JSON.stringify({ body: result }), 200,{"Content-Type": "application/json"});
     
 
