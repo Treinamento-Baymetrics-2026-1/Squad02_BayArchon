@@ -10,10 +10,11 @@ import lixeiraIcon from "../assets/icons/lixeira.svg";
 import configuracaoIcon from "../assets/icons/configurações.svg";
 import reduzirIcon from "../assets/icons/reduzir.svg";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
+  const location = useLocation();
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -77,51 +78,56 @@ export function Sidebar() {
           icon={chatAiIcon}
           text="Chat com IA"
           isExpanded={isExpanded}
+          active={location.pathname === "/admin/chat"}
         />
         <NavItem
           to="/admin"
           icon={visaoGeralIcon}
           text="Visão geral"
           isExpanded={isExpanded}
-          active
+          active={location.pathname === "/admin"}
         />
         <NavItem
           to="/admin/documentos"
           icon={documentosIcon}
           text="Documentos"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/documentos")} // startsWith mantém ativo se houver sub-rotas
         />
         <NavItem
           to="/admin/clientes"
           icon={clienteIcon}
           text="Clientes"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/clientes")}
         />
         <NavItem
           to="/admin/usuarios"
           icon={usuariosIcon}
           text="Usuários"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/usuarios")}
         />
         <NavItem
           to="/admin/setores"
-
           icon={setoresIcon}
           text="Setores"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/setores")}
         />
         <NavItem
           to="/admin/lixeira"
           icon={lixeiraIcon}
           text="Lixeira"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/lixeira")}
         />
-
         <NavItem
           to="/admin/configuracoes"
           icon={configuracaoIcon}
           text="Configuração"
           isExpanded={isExpanded}
+          active={location.pathname.startsWith("/admin/configuracoes")}
         />
       </nav>
     </aside>
