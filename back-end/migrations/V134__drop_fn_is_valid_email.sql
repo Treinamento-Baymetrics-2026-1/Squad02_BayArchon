@@ -1,0 +1,1 @@
+DROP FUNCTION IF EXISTS functions.fn_is_valid_email(TEXT);
