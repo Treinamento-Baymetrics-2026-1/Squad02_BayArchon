@@ -105,12 +105,6 @@ O acesso ao banco de dados deve ser realizado por usuários autorizados e vincul
 
 - As alterações estruturais no banco de dados devem ser realizadas exclusivamente por meio das migrations gerenciadas pelo Flyway, respeitando o fluxo de versionamento estabelecido pelo projeto.
 
-## Controle de Acesso
-## Colocar
-
-## ROLEs
-## Colocar
-
 ## Versionamento
 
 O código-fonte do banco de dados é versionado utilizando o GitHub, de modo que o repositório reflita continuamente o estado atual do banco de dados implantado.
@@ -130,10 +124,17 @@ A rastreabilidade das ações é garantida por meio de registros automáticos de
 Além disso, a plataforma Supabase disponibiliza ferramentas para monitoramento da instância do banco de dados, permitindo acompanhar métricas de utilização, desempenho, execução de consultas e registros de logs operacionais, auxiliando na identificação de falhas e na manutenção da integridade do ambiente.
 
 ## Política de Backup
-## Colocar
 
-## Scripts de Backup
-## ?
+O banco de dados utiliza o mecanismo de backup automático disponibilizado pela plataforma Supabase.
+
+Os projetos dos planos Pro possuem backups diários automáticos, com disponibilidade dos últimos 7 dias de backups para restauração. Os backups podem ser consultados e restaurados por meio da seção de backups do banco de dados no painel do Supabase. 
+
+Esse mecanismo permite a recuperação do banco de dados a partir de um dos backups disponíveis, contribuindo para a proteção dos dados contra falhas ou perda acidental.
+
+Para necessidades de recuperação mais precisas, o Supabase também disponibiliza o Point-in-Time Recovery (PITR) como recurso adicional, permitindo a recuperação para um ponto específico no tempo dentro do período de retenção configurado. 
+
+Os backups do banco de dados referem-se aos dados armazenados no PostgreSQL. Os objetos armazenados por meio do Supabase Storage não são incluídos diretamente nesses backups, sendo necessário considerar mecanismos específicos de proteção e recuperação para os arquivos armazenados.
+
 
 ## Arquivamento e Versionamento
 
@@ -329,3 +330,197 @@ fk_logs_perfomed_by
 ```
 
 Esse padrão deve ser utilizado independentemente do schema ao qual pertence a tabela referenciada, evitando nomenclaturas excessivamente longas e mantendo a legibilidade do modelo de dados.
+
+# Nomenclaturas de CONSTRAINTs Nomeáveis
+
+As `CONSTRAINTs` nomeáveis devem utilizar um prefixo que identifique seu tipo, seguido pelo nome da tabela e, quando aplicável, pelo nome da coluna ou das colunas envolvidas.
+
+O padrão geral de nomenclatura é:
+
+```text
+<sigla_constraint>_<nome_tabela>_<nome_coluna>
+```
+
+Para `CONSTRAINTs` compostas, os nomes das colunas envolvidas devem ser adicionados à nomenclatura.
+
+Exemplos:
+
+```text
+pk_users
+
+fk_documents_category_id
+
+uq_companies_clients_cnpj
+
+chk_documents_source
+
+```
+
+Para `CONSTRAINTs` compostas:
+
+```text
+uq_user_company_id
+
+uq_document_category_type
+
+fk_document_company_project
+```
+
+A nomenclatura deve ser objetiva e permitir identificar o tipo de `CONSTRAINT` e os objetos envolvidos.
+
+---
+
+# Nomenclaturas de Enumerações, Funções e Procedimentos
+
+## Enumerações
+
+As enumerações (`ENUMs`) devem utilizar o prefixo `e_`, seguido de um nome descritivo relacionado à finalidade da enumeração.
+
+O padrão adotado é:
+
+```text
+e_<nome_enum>
+```
+
+Exemplos:
+
+```text
+e_type_terms
+
+e_status_documents
+
+e_visibility_documents
+```
+
+Quando a enumeração estiver relacionada exclusivamente a uma entidade ou funcionalidade específica, seu nome deve refletir essa finalidade.
+
+---
+
+## Funções
+
+As funções devem utilizar o prefixo `fn_`, seguido de uma descrição objetiva da operação realizada.
+
+O padrão adotado é:
+
+```text
+fn_<nome_funcao>
+```
+
+Exemplos:
+
+```text
+fn_is_valid_email
+
+fn_is_valid_cnpj
+
+fn_is_valid_text
+
+fn_update_updated_at
+```
+
+As funções reutilizáveis devem ser armazenadas no schema `functions`.
+
+Funções auxiliares devem ser armazenadas no schema `helpers`.
+
+---
+
+## Procedimentos
+
+Quando utilizados, os procedimentos devem utilizar o prefixo `sp_`, seguido de uma descrição objetiva da operação realizada.
+
+O padrão adotado é:
+
+```text
+sp_<nome_procedimento>
+```
+
+Exemplo:
+
+```text
+sp_process_document
+```
+
+---
+
+# Nomenclaturas de Triggers
+
+As triggers devem utilizar o prefixo `trg_`, seguido da operação realizada e do nome da tabela à qual estão associadas.
+
+O padrão adotado é:
+
+```text
+trg_<operacao>_<nome_tabela>
+```
+
+Exemplos:
+
+```text
+trg_update_updated_at
+
+trg_log_user_created
+
+trg_log_document_created
+
+trg_log_document_updated
+
+trg_log_document_deleted
+```
+
+Quando a trigger estiver relacionada a uma operação específica de auditoria, o nome deve indicar claramente o evento registrado.
+
+Exemplos:
+
+```text
+trg_log_user_created
+
+trg_log_document_visibility_changed
+
+trg_log_document_deleted
+```
+
+As triggers devem ser nomeadas de forma clara e objetiva, permitindo identificar a operação realizada e a finalidade do mecanismo.
+
+---
+
+# Nomenclaturas de Índices
+
+Os índices devem utilizar o prefixo `idx_`, seguido do nome da tabela e, quando aplicável, pelo nome da coluna ou das colunas indexadas.
+
+O padrão adotado é:
+
+```text
+idx_<nome_tabela>_<nome_coluna>
+```
+
+Exemplos:
+
+```text
+idx_users_email
+
+idx_documents_category_id
+
+idx_documents_created_at
+```
+
+Para índices compostos, as colunas devem ser adicionadas na ordem em que são utilizadas no índice.
+
+Exemplo:
+
+```text
+idx_documents_client_id_project_id
+```
+
+Índices parciais devem manter o mesmo padrão de nomenclatura, adicionando uma descrição que permita identificar a condição aplicada.
+
+Exemplo:
+
+```text
+idx_users_email_active
+```
+# Equipe Responsável
+
+Este projeto de banco de dados foi desenvolvido pela equipe responsável pelo desenvolvimento do sistema, contemplando a modelagem, implementação e manutenção da estrutura do banco de dados.
+
+A responsabilidade pelo desenvolvimento e manutenção do banco de dados é atribuída à equipe de desenvolvimento, com destaque para **Maria Eduarda Sinis**, responsável pela modelagem e implementação do banco de dados.
+
+Para dúvidas técnicas, contribuições ou solicitações relacionadas à manutenção e evolução do banco de dados, entrar em contato pelo email eduarda.sinis@gmail.com.
