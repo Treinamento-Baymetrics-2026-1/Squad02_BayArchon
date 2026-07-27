@@ -1,5 +1,5 @@
 import Search from "../../assets/icons/search.svg?react";
-import avatarImage from "../../assets/images/avatar-image.png";
+import avatarImage from "../../assets/images/avatarimage.png";
 import { useState } from "react";
 import { UserProfileModal } from "./UserProfileModal";
 

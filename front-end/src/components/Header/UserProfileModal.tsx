@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import avatarImage from "../../assets/images/avatar-image.png";
+import avatarImage from "../../assets/images/avatarimage.png";
 import ApartamentsIcon from "../../assets/icons/apartament.svg?react";
 import EscudoIcon from "../../assets/icons/escudo.svg?react";
 import PencilIcon from "../../assets/icons/pencil.svg?react";
