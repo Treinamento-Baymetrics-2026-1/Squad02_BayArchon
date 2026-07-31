@@ -62,7 +62,7 @@ describe("LoginForm Component", () => {
   });
 
 
-  it("deve exibir mensagem de erro quando as credenciais forem inválidas", async () => {
+  it("deve exibir erro quando as credenciais forem inválidas", async () => {
     vi.mocked(supabase.auth.signInWithPassword).mockResolvedValueOnce({
       data: { user: null, session: null } as never,
       error: { message: "Invalid login credentials", name: "AuthApiError", status: 400 } as never,
@@ -79,8 +79,25 @@ describe("LoginForm Component", () => {
     });
   });
 
+
+  it("deve exibir mensagem de erro para falhas no servidor", async () => {
+    vi.mocked(supabase.auth.signInWithPassword).mockResolvedValueOnce({
+      data: { user: null, session: null } as never,
+      error: { message: "Internal Server Error", name: "AuthApiError", status: 500 } as never,
+    });
+
+    renderLoginForm();
+
+    await user.type(screen.getByLabelText(/email/i), "teste@baymetrics.com");
+    await user.type(screen.getByLabelText(/senha/i), "senhaerrada");
+    await user.click(screen.getByRole("button", { name: /entrar/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Ocorreu um erro ao fazer login.")).toBeInTheDocument();
+    });
+  });
   
-  it("deve exibir a tela de sucesso e navegar para /admin ao logar corretamente", async () => {
+  it("deve exibir o modal de sucesso e navegar para  a rota /admin ao logar-se", async () => {
   
     vi.mocked(supabase.auth.signInWithPassword).mockResolvedValueOnce({
       data: { user: { id: "123" }, session: {} }as never,

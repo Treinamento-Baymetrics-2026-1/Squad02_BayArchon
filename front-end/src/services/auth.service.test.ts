@@ -2,7 +2,8 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { 
   registerUserAPI, 
   sendRedefinePasswordAPI, 
-  firstAccessAPI
+  firstAccessAPI,
+  updatePasswordAPI
 } from './auth.service'; 
 
 const MOCK_API_URL = 'https://fake-supabase.com';
@@ -67,13 +68,12 @@ describe('Auth Service', () => {
         ok: false,
         text: async () => 'Internal Server Error',
       });
-
       await expect(registerUserAPI(mockPayload)).rejects.toThrow('Internal Server Error');
     });
   });
 
   describe('sendRedefinePasswordAPI', () => {
-    it('deve enviar o e-mail corretamente para redefinição', async () => {
+    it('deve enviar o e-mail para redefinição', async () => {
       fetchMock.mockResolvedValueOnce({
         ok: true,
         json: async () => ({ success: true }),
@@ -89,7 +89,24 @@ describe('Auth Service', () => {
         })
       );
     });
+
+    it('deve lançar um erro com a mensagem JSON da API quando falhar', async () => {
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        text: async () => JSON.stringify({ message: 'E-mail não encontrado.' }),
+      });
+      await expect(sendRedefinePasswordAPI({ email: 'errado@teste.com' })).rejects.toThrow('E-mail não encontrado.');
+    });
+
+    it('deve lançar um erro caso a API não retorne um JSON válido', async () => {
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        text: async () => 'Service Unavailable',
+      });
+      await expect(sendRedefinePasswordAPI({ email: 'errado@teste.com' })).rejects.toThrow('Service Unavailable');
+    });
   });
+
   describe('firstAccessAPI', () => {
     const mockPasswordPayload = {
       password: 'newpassword123',
@@ -124,6 +141,56 @@ describe('Auth Service', () => {
           }),
         })
       );
+    });
+
+    it('deve lançar um erro com a mensagem JSON da API quando falhar', async () => {
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        text: async () => JSON.stringify({ message: 'Token inválido ou expirado.' }),
+      });
+      await expect(firstAccessAPI(mockPasswordPayload)).rejects.toThrow('Token inválido ou expirado.');
+    });
+
+    it('deve lançar um erro caso a API não retorne um JSON válido', async () => {
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        text: async () => 'Bad Request',
+      });
+      await expect(firstAccessAPI(mockPasswordPayload)).rejects.toThrow('Bad Request');
+    });
+  });
+
+  describe('updatePasswordAPI', () => {
+    const mockUpdatePayload = {
+      password: 'nova-senha',
+      confirm_password: 'nova-senha',
+      token: 'token-valido-123'
+    };
+
+    it('deve realizar o fetch na rota /update-password com sucesso', async () => {
+      fetchMock.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ success: true }),
+      });
+
+      const response = await updatePasswordAPI(mockUpdatePayload);
+      expect(response).toEqual({ success: true });
+    });
+
+    it('deve lançar um erro com a mensagem JSON da API quando falhar', async () => {
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        text: async () => JSON.stringify({ message: 'A nova senha deve ser diferente da atual.' }),
+      });
+      await expect(updatePasswordAPI(mockUpdatePayload)).rejects.toThrow('A nova senha deve ser diferente da atual.');
+    });
+
+    it('deve lançar um erro caso a API não retorne um JSON válido', async () => {
+      fetchMock.mockResolvedValueOnce({
+        ok: false,
+        text: async () => 'Gateway Timeout',
+      });
+      await expect(updatePasswordAPI(mockUpdatePayload)).rejects.toThrow('Gateway Timeout');
     });
   });
 });
