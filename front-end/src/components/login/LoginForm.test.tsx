@@ -96,6 +96,31 @@ describe("LoginForm Component", () => {
       expect(screen.getByText("Ocorreu um erro ao fazer login.")).toBeInTheDocument();
     });
   });
+
+  it("deve alterar o texto do botão para 'Validando...' durante o carregamento", async () => {
+    let resolveMock: (value: unknown) => void;
+    const pendingPromise = new Promise((resolve) => {
+      resolveMock = resolve;
+    });
+
+    vi.mocked(supabase.auth.signInWithPassword).mockReturnValueOnce(pendingPromise as never);
+
+    renderLoginForm();
+    await user.type(screen.getByLabelText(/email/i), "teste@baymetrics.com");
+    await user.type(screen.getByLabelText(/senha/i), "senhaCorreta123");
+    const btnEntrar = screen.getByRole("button", { name: /entrar/i });
+  
+    const clickPromise = user.click(btnEntrar);
+
+    expect(await screen.findByRole("button", { name: /validando\.\.\./i })).toBeInTheDocument();
+
+    resolveMock!({
+      data: { user: { id: "123" }, session: {} },
+      error: null,
+    });
+  
+    await clickPromise;
+  });
   
   it("deve exibir o modal de sucesso e navegar para  a rota /admin ao logar-se", async () => {
   
